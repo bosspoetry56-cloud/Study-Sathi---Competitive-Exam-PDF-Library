@@ -3,778 +3,765 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
-<title>Study Sathi - Math Mock Test</title>
+<title>Study Sathi - Mathematics Mock Test</title>
 
-<style> 
+<style>
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
 body{
-    font-family:Arial,sans-serif;
-    background:#f5f7fb;
-    color:#172033;
-    line-height:1.6;
+  font-family:Arial,Helvetica,sans-serif;
+  background:
+    radial-gradient(circle at 50% -10%,#292929 0,#0b0b0b 38%,#030303 100%);
+  color:#fff;
+  min-height:100vh;
 }
 
-header{
-    background:white;
-    padding:17px 6%;
-    box-shadow:0 2px 12px rgba(0,0,0,.08);
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    position:sticky;
-    top:0;
-    z-index:10;
+.header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  height:70px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 6%;
+  background:rgba(5,5,5,.94);
+  border-bottom:1px solid #292929;
+  backdrop-filter:blur(12px);
 }
 
 .logo{
-    font-size:24px;
-    font-weight:800;
-    color:#2563eb;
+  font-size:21px;
+  font-weight:800;
 }
 
 .logo span{
-    color:#111827;
+  color:#888;
 }
 
 .timer{
-    background:#fee2e2;
-    color:#dc2626;
-    padding:9px 16px;
-    border-radius:10px;
-    font-weight:bold;
-    font-size:16px;
+  min-width:92px;
+  text-align:center;
+  padding:10px 14px;
+  border:1px solid #444;
+  border-radius:14px;
+  background:#151515;
+  font-weight:800;
+}
+
+.timer.warning{
+  background:#fff;
+  color:#000;
+  border-color:#fff;
 }
 
 .hero{
-    text-align:center;
-    padding:35px 15px;
-    background:linear-gradient(135deg,#eff6ff,#fff);
+  text-align:center;
+  padding:30px 15px 20px;
 }
 
 .hero h1{
-    font-size:30px;
-    margin-bottom:5px;
+  font-size:28px;
+  margin-bottom:7px;
 }
 
 .hero p{
-    color:#64748b;
+  color:#999;
+  font-size:14px;
 }
 
 .container{
-    max-width:900px;
-    margin:auto;
-    padding:25px 15px;
+  width:min(850px,94%);
+  margin:auto;
+  padding:5px 0 50px;
+}
+
+/* QUESTION NUMBERS */
+
+.nav{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:5px 0 17px;
+}
+
+.nav button{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  border:1px solid #444;
+  background:#111;
+  color:#aaa;
+  font-weight:bold;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.nav button.current{
+  background:#fff;
+  color:#000;
+  border-color:#fff;
+  transform:scale(1.08);
+}
+
+.nav button.answered{
+  color:#fff;
+  border-color:#aaa;
+}
+
+/* PROGRESS */
+
+.progress{
+  height:4px;
+  width:100%;
+  background:#222;
+  border-radius:20px;
+  overflow:hidden;
+  margin-bottom:18px;
+}
+
+.progressBar{
+  height:100%;
+  width:10%;
+  background:#fff;
+  transition:.3s;
+}
+
+/* QUESTION CARD */
+
+.questionCard{
+  background:#fff;
+  color:#111;
+  border-radius:24px;
+  padding:30px;
+  min-height:455px;
+  box-shadow:0 20px 70px rgba(0,0,0,.55);
+  animation:slide .25s ease;
+}
+
+@keyframes slide{
+  from{
+    opacity:0;
+    transform:translateX(22px);
+  }
+  to{
+    opacity:1;
+    transform:translateX(0);
+  }
+}
+
+.qNumber{
+  color:#777;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:1px;
+  margin-bottom:15px;
 }
 
 .question{
-    background:white;
-    padding:22px;
-    margin-bottom:18px;
-    border-radius:15px;
-    box-shadow:0 4px 18px rgba(0,0,0,.06);
+  font-size:22px;
+  line-height:1.5;
+  font-weight:700;
+  margin-bottom:24px;
 }
 
-.question h2{
-    font-size:18px;
-    margin-bottom:12px;
+/* OPTIONS */
+
+.options{
+  display:grid;
+  gap:12px;
 }
 
 .option{
-    display:block;
-    padding:11px 13px;
-    margin:8px 0;
-    background:#f8fafc;
-    border:1px solid #e2e8f0;
-    border-radius:9px;
-    cursor:pointer;
+  width:100%;
+  min-height:58px;
+  display:flex;
+  align-items:center;
+  gap:13px;
+  padding:13px 16px;
+  background:#fafafa;
+  color:#111;
+  border:1.5px solid #ddd;
+  border-radius:15px;
+  text-align:left;
+  cursor:pointer;
+  transition:
+    background .2s,
+    border .2s,
+    box-shadow .2s,
+    transform .15s;
 }
 
 .option:hover{
-    background:#eff6ff;
+  border-color:#999;
+  background:#f3f3f3;
+  transform:translateY(-1px);
 }
 
-.option input{
-    margin-right:8px;
+.option.selected{
+  background:#f0f0f0;
+  border-color:#111;
+  box-shadow:
+    0 0 0 3px rgba(0,0,0,.07),
+    0 8px 25px rgba(0,0,0,.12);
 }
 
-.submit-btn{
-    width:100%;
-    border:0;
-    padding:15px;
-    background:#2563eb;
-    color:white;
-    font-size:17px;
-    font-weight:bold;
-    border-radius:11px;
-    cursor:pointer;
+.radio{
+  width:23px;
+  height:23px;
+  min-width:23px;
+  border:2px solid #999;
+  border-radius:50%;
+  background:#fff;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  transition:.2s;
 }
+
+.option.selected .radio{
+  border-color:#111;
+}
+
+.option.selected .radio:after{
+  content:"";
+  width:11px;
+  height:11px;
+  border-radius:50%;
+  background:#111;
+  animation:pop .18s ease;
+}
+
+@keyframes pop{
+  from{
+    transform:scale(.2);
+  }
+  to{
+    transform:scale(1);
+  }
+}
+
+.letter{
+  font-weight:800;
+}
+
+/* BUTTONS */
+
+.controls{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  margin-top:18px;
+}
+
+.btn{
+  padding:13px 22px;
+  border-radius:12px;
+  font-weight:800;
+  border:1px solid #444;
+  cursor:pointer;
+}
+
+.prev{
+  background:#151515;
+  color:#fff;
+}
+
+.next,
+.submit{
+  background:#fff;
+  color:#000;
+}
+
+.submit{
+  display:none;
+}
+
+/* RESULT */
 
 .result{
-    display:none;
-    background:white;
-    margin-top:25px;
-    padding:25px;
-    border-radius:15px;
-    box-shadow:0 4px 18px rgba(0,0,0,.08);
+  display:none;
+  background:#fff;
+  color:#111;
+  border-radius:24px;
+  padding:30px;
+  margin-top:20px;
 }
 
 .score{
-    text-align:center;
-    font-size:28px;
-    font-weight:bold;
-    color:#2563eb;
-    margin-bottom:15px;
+  text-align:center;
+  font-size:34px;
+  font-weight:900;
+  margin-bottom:8px;
+}
+
+.resultText{
+  text-align:center;
+  color:#666;
+  margin-bottom:28px;
 }
 
 .solution{
-    background:#f8fafc;
-    padding:17px;
-    margin-top:15px;
-    border-radius:10px;
+  border-top:1px solid #ddd;
+  padding:22px 0;
+}
+
+.solution h3{
+  font-size:17px;
+  line-height:1.5;
+  margin-bottom:10px;
 }
 
 .correct{
-    color:#15803d;
-    font-weight:bold;
+  color:#16803c;
+  font-weight:700;
 }
 
 .wrong{
-    color:#dc2626;
-    font-weight:bold;
+  color:#d62828;
+  font-weight:700;
 }
+
+.explain{
+  background:#f4f4f4;
+  padding:13px;
+  border-radius:10px;
+  margin-top:10px;
+  line-height:1.6;
+}
+
+.odia{
+  background:#f1f1f1;
+  padding:13px;
+  border-radius:10px;
+  margin-top:9px;
+  line-height:1.7;
+}
+
+.restart{
+  width:100%;
+  margin-top:20px;
+  background:#111;
+  color:#fff;
+}
+
+/* MOBILE */
 
 @media(max-width:600px){
 
-    .hero h1{
-        font-size:25px;
-    }
+  .header{
+    padding:0 4%;
+  }
 
-    header{
-        padding:14px 4%;
-    }
+  .logo{
+    font-size:18px;
+  }
 
-    .logo{
-        font-size:20px;
-    }
+  .timer{
+    min-width:82px;
+    font-size:14px;
+  }
 
-    .timer{
-        font-size:14px;
-        padding:7px 10px;
-    }
+  .hero h1{
+    font-size:23px;
+  }
+
+  .questionCard{
+    padding:22px;
+    min-height:480px;
+  }
+
+  .question{
+    font-size:19px;
+  }
+
+  .option{
+    min-height:56px;
+    padding:12px;
+  }
+
+  .controls .btn{
+    padding:12px 16px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<header>
+<header class="header">
 
-    <div class="logo">
-        📚 Study <span>Sathi</span>
-    </div>
+  <div class="logo">
+    📚 Study <span>Sathi</span>
+  </div>
 
-    <div class="timer" id="timer">
-        ⏱️ 15:00
-    </div>
+  <div class="timer" id="timer">
+    15:00
+  </div>
 
 </header>
 
-
 <section class="hero">
-
-    <h1>🧮 Mathematics Mock Test</h1>
-
-    <p>10 Questions • 15 Minutes • Free Practice Test</p>
-
+  <h1>🧮 Mathematics Mock Test</h1>
+  <p>10 Questions • 15 Minutes • Detailed Solutions</p>
 </section>
 
+<main class="container">
 
-<div class="container">
+  <div class="nav" id="nav"></div>
 
-<form id="quizForm">
+  <div class="progress">
+    <div class="progressBar" id="progressBar"></div>
+  </div>
 
+  <div class="questionCard" id="questionCard"></div>
 
-<!-- QUESTION 1 -->
+  <div class="controls" id="controls">
 
-<div class="question">
+    <button class="btn prev"
+            id="prevBtn"
+            onclick="previousQuestion()">
+      ← Previous
+    </button>
 
-<h2>1. Percentage</h2>
+    <button class="btn next"
+            id="nextBtn"
+            onclick="nextQuestion()">
+      Next →
+    </button>
 
-<p>
-To pass an examination, a candidate needs 36% marks.
-A student scores 190 marks and fails by 35 marks.
-What is the maximum marks for the examination?
-</p>
+    <button class="btn submit"
+            id="submitBtn"
+            onclick="submitQuiz()">
+      Submit Test
+    </button>
 
-<label class="option">
-<input type="radio" name="q1" value="A"> A) 500
-</label>
+  </div>
 
-<label class="option">
-<input type="radio" name="q1" value="B"> B) 550
-</label>
-
-<label class="option">
-<input type="radio" name="q1" value="C"> C) 625
-</label>
-
-<label class="option">
-<input type="radio" name="q1" value="D"> D) 650
-</label>
-
-<label class="option">
-<input type="radio" name="q1" value="E"> E) 700
-</label>
-
-</div>
-
-
-<!-- QUESTION 2 -->
-
-<div class="question">
-
-<h2>2. Profit, Loss & Discount</h2>
-
-<p>
-A shopkeeper marks an article 40% above its cost price
-and allows a discount of 20% on the marked price.
-What is his overall profit percentage?
-</p>
-
-<label class="option">
-<input type="radio" name="q2" value="A"> A) 10%
-</label>
-
-<label class="option">
-<input type="radio" name="q2" value="B"> B) 12%
-</label>
-
-<label class="option">
-<input type="radio" name="q2" value="C"> C) 15%
-</label>
-
-<label class="option">
-<input type="radio" name="q2" value="D"> D) 18%
-</label>
-
-<label class="option">
-<input type="radio" name="q2" value="E"> E) 20%
-</label>
-
-</div>
-
-
-<!-- QUESTION 3 -->
-
-<div class="question">
-
-<h2>3. Ratio & Proportion</h2>
-
-<p>
-Two numbers are in the ratio 3 : 5. If 9 is subtracted
-from each number, the ratio becomes 12 : 23.
-What is the smaller number?
-</p>
-
-<label class="option">
-<input type="radio" name="q3" value="A"> A) 27
-</label>
-
-<label class="option">
-<input type="radio" name="q3" value="B"> B) 33
-</label>
-
-<label class="option">
-<input type="radio" name="q3" value="C"> C) 36
-</label>
-
-<label class="option">
-<input type="radio" name="q3" value="D"> D) 45
-</label>
-
-<label class="option">
-<input type="radio" name="q3" value="E"> E) 55
-</label>
-
-</div>
-
-
-<!-- QUESTION 4 -->
-
-<div class="question">
-
-<h2>4. Problems on Ages</h2>
-
-<p>
-The ratio of the present ages of a father and his son is 5 : 2.
-Four years hence, the ratio of their ages will be 11 : 5.
-What is the present age of the father?
-</p>
-
-<label class="option">
-<input type="radio" name="q4" value="A"> A) 35 years
-</label>
-
-<label class="option">
-<input type="radio" name="q4" value="B"> B) 40 years
-</label>
-
-<label class="option">
-<input type="radio" name="q4" value="C"> C) 45 years
-</label>
-
-<label class="option">
-<input type="radio" name="q4" value="D"> D) 50 years
-</label>
-
-<label class="option">
-<input type="radio" name="q4" value="E"> E) 60 years
-</label>
-
-</div>
-
-
-<!-- QUESTION 5 -->
-
-<div class="question">
-
-<h2>5. Time & Work</h2>
-
-<p>
-A can complete a piece of work in 15 days and B can complete
-the same work in 20 days. They work together for 4 days,
-and then A leaves. In how many more days will B alone
-finish the remaining work?
-</p>
-
-<label class="option">
-<input type="radio" name="q5" value="A"> A) 9⅓ days
-</label>
-
-<label class="option">
-<input type="radio" name="q5" value="B"> B) 10⅔ days
-</label>
-
-<label class="option">
-<input type="radio" name="q5" value="C"> C) 11 days
-</label>
-
-<label class="option">
-<input type="radio" name="q5" value="D"> D) 12 days
-</label>
-
-<label class="option">
-<input type="radio" name="q5" value="E"> E) 13⅓ days
-</label>
-
-</div>
-
-
-<!-- QUESTION 6 -->
-
-<div class="question">
-
-<h2>6. Pipe & Cistern</h2>
-
-<p>
-Pipe A can fill a tank in 12 hours and Pipe B can fill it in
-15 hours. Pipe C can empty the full tank in 20 hours.
-If all three pipes are opened simultaneously, how much time
-will it take to fill the tank completely?
-</p>
-
-<label class="option">
-<input type="radio" name="q6" value="A"> A) 8 hours
-</label>
-
-<label class="option">
-<input type="radio" name="q6" value="B"> B) 10 hours
-</label>
-
-<label class="option">
-<input type="radio" name="q6" value="C"> C) 12 hours
-</label>
-
-<label class="option">
-<input type="radio" name="q6" value="D"> D) 14 hours
-</label>
-
-<label class="option">
-<input type="radio" name="q6" value="E"> E) 16 hours
-</label>
-
-</div>
-
-
-<!-- QUESTION 7 -->
-
-<div class="question">
-
-<h2>7. Time, Speed & Distance</h2>
-
-<p>
-If a person travels at a speed of 30 km/h, he reaches his office
-10 minutes late. If he increases his speed to 40 km/h, he reaches
-5 minutes early. What is the distance between his home and office?
-</p>
-
-<label class="option">
-<input type="radio" name="q7" value="A"> A) 25 km
-</label>
-
-<label class="option">
-<input type="radio" name="q7" value="B"> B) 30 km
-</label>
-
-<label class="option">
-<input type="radio" name="q7" value="C"> C) 35 km
-</label>
-
-<label class="option">
-<input type="radio" name="q7" value="D"> D) 40 km
-</label>
-
-<label class="option">
-<input type="radio" name="q7" value="E"> E) 45 km
-</label>
-
-</div>
-
-
-<!-- QUESTION 8 -->
-
-<div class="question">
-
-<h2>8. Train Problems</h2>
-
-<p>
-A 180 m long train is running at a uniform speed of 54 km/h.
-How many seconds will it take to completely cross a platform
-that is 320 m long?
-</p>
-
-<label class="option">
-<input type="radio" name="q8" value="A"> A) 25 seconds
-</label>
-
-<label class="option">
-<input type="radio" name="q8" value="B"> B) 30⅓ seconds
-</label>
-
-<label class="option">
-<input type="radio" name="q8" value="C"> C) 33⅓ seconds
-</label>
-
-<label class="option">
-<input type="radio" name="q8" value="D"> D) 36 seconds
-</label>
-
-<label class="option">
-<input type="radio" name="q8" value="E"> E) 40 seconds
-</label>
-
-</div>
-
-
-<!-- QUESTION 9 -->
-
-<div class="question">
-
-<h2>9. Boat & Stream</h2>
-
-<p>
-The speed of a boat in still water is 10 km/h and the speed
-of the stream is 2 km/h. The boat travels 24 km upstream
-and returns 24 km downstream. What is the total time?
-</p>
-
-<label class="option">
-<input type="radio" name="q9" value="A"> A) 4 hours
-</label>
-
-<label class="option">
-<input type="radio" name="q9" value="B"> B) 5 hours
-</label>
-
-<label class="option">
-<input type="radio" name="q9" value="C"> C) 5 hours 30 minutes
-</label>
-
-<label class="option">
-<input type="radio" name="q9" value="D"> D) 6 hours
-</label>
-
-<label class="option">
-<input type="radio" name="q9" value="E"> E) 6 hours 30 minutes
-</label>
-
-</div>
-
-
-<!-- QUESTION 10 -->
-
-<div class="question">
-
-<h2>10. Simple & Compound Interest</h2>
-
-<p>
-The difference between compound interest and simple interest
-on a certain sum at 10% per annum for 2 years is ₹65.
-What is the principal sum?
-</p>
-
-<label class="option">
-<input type="radio" name="q10" value="A"> A) ₹5,500
-</label>
-
-<label class="option">
-<input type="radio" name="q10" value="B"> B) ₹6,000
-</label>
-
-<label class="option">
-<input type="radio" name="q10" value="C"> C) ₹6,500
-</label>
-
-<label class="option">
-<input type="radio" name="q10" value="D"> D) ₹7,000
-</label>
-
-<label class="option">
-<input type="radio" name="q10" value="E"> E) ₹7,500
-</label>
-
-</div>
-
-
-<button type="button" class="submit-btn" onclick="submitQuiz()">
-    Submit Mock Test
-</button>
-
-</form>
-
-
-<!-- RESULT -->
-
-<div class="result" id="result">
+  <div class="result" id="result">
 
     <div class="score" id="score"></div>
 
-    <p id="message"></p>
+    <div class="resultText" id="resultText"></div>
 
-    <h2 style="margin-top:25px;">📖 Detailed Solutions</h2>
+    <h2>📖 Detailed Solutions</h2>
 
+    <div id="solutions"></div>
 
-    <div class="solution">
-        <h3>1. Percentage — Answer: C) 625</h3>
-        <p>
-        Passing marks = 190 + 35 = 225.<br>
-        36% of Maximum Marks = 225.<br>
-        Maximum Marks = 225 × 100 / 36 = <strong>625</strong>.
-        </p>
-    </div>
+    <button class="btn restart"
+            onclick="location.reload()">
+      🔄 Retake Mock Test
+    </button>
 
+  </div>
 
-    <div class="solution">
-        <h3>2. Profit, Loss & Discount — Answer: B) 12%</h3>
-        <p>
-        Let CP = 100.<br>
-        Marked Price = 140.<br>
-        After 20% discount, SP = 140 × 80/100 = 112.<br>
-        Profit = 112 − 100 = 12.<br>
-        Therefore Profit% = <strong>12%</strong>.
-        </p>
-    </div>
-
-
-    <div class="solution">
-        <h3>3. Ratio & Proportion — Answer: B) 33</h3>
-        <p>
-        Numbers = 3x and 5x.<br>
-        (3x − 9)/(5x − 9) = 12/23.<br>
-        23(3x − 9) = 12(5x − 9).<br>
-        69x − 207 = 60x − 108.<br>
-        9x = 99 → x = 11.<br>
-        Smaller number = 3 × 11 = <strong>33</strong>.
-        </p>
-    </div>
-
-
-    <div class="solution">
-        <h3>4. Problems on Ages — Answer: B) 40 years</h3>
-        <p>
-        Present ages = 5x and 2x.<br>
-        Four years later:<br>
-        (5x + 4)/(2x + 4) = 11/5.<br>
-        25x + 20 = 22x + 44.<br>
-        3x = 24 → x = 8.<br>
-        Father's age = 5 × 8 = <strong>40 years</strong>.
-        </p>
-    </div>
-
-
-    <div class="solution">
-        <h3>5. Time & Work — Answer: B) 10⅔ days</h3>
-        <p>
-        A's one-day work = 1/15.<br>
-        B's one-day work = 1/20.<br>
-        Together = 7/60.<br>
-        Work in 4 days = 28/60 = 7/15.<br>
-        Remaining work = 8/15.<br>
-        B takes (8/15) ÷ (1/20) = <strong>10⅔ days</strong>.
-        </p>
-    </div>
-
-
-    <div class="solution">
-        <h3>6. Pipe & Cistern — Answer: B) 10 hours</h3>
-        <p>
-        Net rate = 1/12 + 1/15 − 1/20.<br>
-        LCM = 60.<br>
-        Net rate = 5/60 + 4/60 − 3/60 = 6/60 = 1/10.<br>
-        Therefore tank fills in <strong>10 hours</strong>.
-        </p>
-    </div>
-
-
-    <div class="solution">
-        <h3>7. Time, Speed & Distance — Answer: B) 30 km</h3>
-        <p>
-        Difference in arrival time = 15 minutes = 1/4 hour.<br>
-        D/30 − D/40 = 1/4.<br>
-        D(1/120) = 1/4.<br>
-        Therefore D = <strong>30 km</strong>.
-        </p>
-    </div>
-
-
-    <div class="solution">
-        <h3>8. Train Problems — Answer: C) 33⅓ seconds</h3>
-        <p>
-        Total distance = 180 + 320 = 500 m.<br>
-        54 km/h = 15 m/s.<br>
-        Time = 500/15 = <strong>33⅓ seconds</strong>.
-        </p>
-    </div>
-
-
-    <div class="solution">
-        <h3>9. Boat & Stream — Answer: B) 5 hours</h3>
-        <p>
-        Upstream speed = 10 − 2 = 8 km/h.<br>
-        Downstream speed = 10 + 2 = 12 km/h.<br>
-        Upstream time = 24/8 = 3 hours.<br>
-        Downstream time = 24/12 = 2 hours.<br>
-        Total = <strong>5 hours</strong>.
-        </p>
-    </div>
-
-
-    <div class="solution">
-        <h3>10. Simple & Compound Interest — Answer: C) ₹6,500</h3>
-        <p>
-        For 2 years at 10%, difference between CI and SI =
-        P × (10/100)².<br>
-        65 = P/100.<br>
-        Therefore P = <strong>₹6,500</strong>.
-        </p>
-    </div>
-
-</div>
-
-</div>
-
+</main>
 
 <script>
 
-let timeLeft = 15 * 60;
-let submitted = false;
+const questions=[
 
-const timer = setInterval(function(){
+{
+q:"To pass an examination, a candidate needs 36% marks. A student scores 190 marks and fails by 35 marks. What is the maximum marks for the examination?",
+o:["500","550","625","650","700"],
+a:2,
+s:"Passing marks = 190 + 35 = 225. Therefore 36% of maximum marks = 225. Maximum marks = 225 × 100 ÷ 36 = 625.",
+od:"ପାସ୍ ମାର୍କ = 190 + 35 = 225। ଏହା ମୋଟ ମାର୍କର 36%। ତେଣୁ ମୋଟ ମାର୍କ = 225 × 100 ÷ 36 = 625।"
+},
 
-    if(timeLeft <= 0){
+{
+q:"A shopkeeper marks an article 40% above its cost price and allows a discount of 20% on the marked price. What is his overall profit percentage?",
+o:["10%","12%","15%","18%","20%"],
+a:1,
+s:"Let CP = 100. MP = 140. After 20% discount, SP = 140 × 80/100 = 112. Profit = 12%.",
+od:"CP = 100 ଧରିଲେ MP = 140। 20% discount ପରେ SP = 112। Profit = 112 − 100 = 12%।"
+},
 
-        clearInterval(timer);
+{
+q:"Two numbers are in the ratio 3 : 5. If 9 is subtracted from each number, the ratio becomes 12 : 23. What is the smaller number?",
+o:["27","33","36","45","55"],
+a:1,
+s:"Let numbers be 3x and 5x. (3x−9)/(5x−9)=12/23. Solving gives x=11. Smaller number = 3×11 = 33.",
+od:"ସଂଖ୍ୟା ଦୁଇଟି 3x ଓ 5x। (3x−9)/(5x−9)=12/23। ସମାଧାନ କଲେ x = 11। ଛୋଟ ସଂଖ୍ୟା = 3×11 = 33।"
+},
 
-        if(!submitted){
-            submitQuiz();
-        }
+{
+q:"The ratio of the present ages of a father and his son is 5 : 2. Four years hence, the ratio of their ages will be 11 : 5. What is the present age of the father?",
+o:["35 years","40 years","45 years","50 years","60 years"],
+a:1,
+s:"Let ages be 5x and 2x. Four years later, (5x+4)/(2x+4)=11/5. Solving gives x=8. Father's age = 40 years.",
+od:"ବର୍ତ୍ତମାନ ବୟସ 5x ଓ 2x। 4 ବର୍ଷ ପରେ (5x+4)/(2x+4)=11/5। x=8। ବାପାଙ୍କ ବୟସ = 5×8 = 40 ବର୍ଷ।"
+},
 
-        return;
-    }
+{
+q:"A can complete a piece of work in 15 days and B can complete the same work in 20 days. They work together for 4 days, and then A leaves. In how many more days will B alone finish the remaining work?",
+o:["9⅓ days","10⅔ days","11 days","12 days","13⅓ days"],
+a:1,
+s:"A's rate = 1/15, B's rate = 1/20. Together = 7/60. In 4 days = 7/15. Remaining = 8/15. B needs (8/15) ÷ (1/20) = 10⅔ days.",
+od:"A ର 1 ଦିନର କାମ = 1/15, B ର = 1/20। ମିଶି = 7/60। 4 ଦିନରେ = 7/15। ବାକି = 8/15। B ଏହାକୁ 10⅔ ଦିନରେ କରିବ।"
+},
 
-    timeLeft--;
+{
+q:"Pipe A can fill a tank in 12 hours and Pipe B can fill it in 15 hours. Pipe C can empty the full tank in 20 hours. If all three pipes are opened simultaneously, how much time will it take to fill the tank completely?",
+o:["8 hours","10 hours","12 hours","14 hours","16 hours"],
+a:1,
+s:"Net rate = 1/12 + 1/15 − 1/20 = 1/10. Therefore the tank will fill in 10 hours.",
+od:"Net rate = 1/12 + 1/15 − 1/20 = 1/10। ତେଣୁ tank ସମ୍ପୂର୍ଣ୍ଣ ଭରିବାକୁ 10 ଘଣ୍ଟା ଲାଗିବ।"
+},
 
-    let minutes = Math.floor(timeLeft / 60);
-    let seconds = timeLeft % 60;
+{
+q:"If a person travels at 30 km/h, he reaches his office 10 minutes late. If he increases his speed to 40 km/h, he reaches 5 minutes early. What is the distance between his home and office?",
+o:["25 km","30 km","35 km","40 km","45 km"],
+a:1,
+s:"Time difference = 15 minutes = 1/4 hour. D/30 − D/40 = 1/4. Therefore D = 30 km.",
+od:"ସମୟ ତଫାତ = 15 ମିନିଟ୍ = 1/4 ଘଣ୍ଟା। D/30 − D/40 = 1/4। ତେଣୁ D = 30 km।"
+},
 
-    document.getElementById("timer").innerHTML =
-        "⏱️ " +
-        String(minutes).padStart(2,"0") +
-        ":" +
-        String(seconds).padStart(2,"0");
+{
+q:"A 180 m long train is running at 54 km/h. How many seconds will it take to completely cross a platform that is 320 m long?",
+o:["25 seconds","30⅓ seconds","33⅓ seconds","36 seconds","40 seconds"],
+a:2,
+s:"Total distance = 180 + 320 = 500 m. 54 km/h = 15 m/s. Time = 500/15 = 33⅓ seconds.",
+od:"ମୋଟ ଦୂରତା = 180 + 320 = 500 m। 54 km/h = 15 m/s। ସମୟ = 500/15 = 33⅓ ସେକେଣ୍ଡ।"
+},
 
-},1000);
+{
+q:"The speed of a boat in still water is 10 km/h and the speed of the stream is 2 km/h. The boat travels 24 km upstream and returns downstream. What is the total time?",
+o:["4 hours","5 hours","5 hours 30 minutes","6 hours","6 hours 30 minutes"],
+a:1,
+s:"Upstream speed = 10−2 = 8 km/h. Downstream speed = 10+2 = 12 km/h. Total time = 24/8 + 24/12 = 5 hours.",
+od:"Upstream speed = 10−2 = 8 km/h। Downstream speed = 10+2 = 12 km/h। ମୋଟ ସମୟ = 24/8 + 24/12 = 5 ଘଣ୍ଟା।"
+},
 
+{
+q:"The difference between compound interest and simple interest on a certain sum at 10% per annum for 2 years is ₹65. What is the principal sum?",
+o:["₹5,500","₹6,000","₹6,500","₹7,000","₹7,500"],
+a:2,
+s:"For 2 years, CI−SI = P × (R/100)². Therefore 65 = P × (10/100)² = P/100. P = ₹6,500.",
+od:"2 ବର୍ଷ ପାଇଁ CI−SI = P × (10/100)²। 65 = P/100। ତେଣୁ Principal = ₹6,500।"
+}
+
+];
+
+let current=0;
+let selected=Array(questions.length).fill(null);
+let time=15*60;
+let submitted=false;
+
+function render(){
+
+  const q=questions[current];
+
+  let html=`
+    <div class="qNumber">
+      QUESTION ${current+1} OF ${questions.length}
+    </div>
+
+    <div class="question">
+      ${q.q}
+    </div>
+
+    <div class="options">
+  `;
+
+  q.o.forEach((option,i)=>{
+
+    html+=`
+      <button class="option ${selected[current]===i?"selected":""}"
+              onclick="choose(${i})">
+
+        <span class="radio"></span>
+
+        <span>
+          <span class="letter">
+            ${String.fromCharCode(65+i)})
+          </span>
+          ${option}
+        </span>
+
+      </button>
+    `;
+
+  });
+
+  html+=`</div>`;
+
+  document.getElementById("questionCard").innerHTML=html;
+
+  updateNav();
+
+  document.getElementById("progressBar").style.width=
+    ((current+1)/questions.length*100)+"%";
+
+  document.getElementById("prevBtn").style.visibility=
+    current===0?"hidden":"visible";
+
+  document.getElementById("nextBtn").style.display=
+    current===questions.length-1?"none":"block";
+
+  document.getElementById("submitBtn").style.display=
+    current===questions.length-1?"block":"none";
+}
+
+function choose(i){
+
+  selected[current]=i;
+
+  render();
+}
+
+function updateNav(){
+
+  const nav=document.getElementById("nav");
+
+  nav.innerHTML="";
+
+  questions.forEach((q,i)=>{
+
+    const b=document.createElement("button");
+
+    b.textContent=i+1;
+
+    if(i===current)
+      b.classList.add("current");
+
+    if(selected[i]!==null)
+      b.classList.add("answered");
+
+    b.onclick=()=>{
+      current=i;
+      render();
+    };
+
+    nav.appendChild(b);
+  });
+}
+
+function nextQuestion(){
+
+  if(current<questions.length-1){
+    current++;
+    render();
+  }
+}
+
+function previousQuestion(){
+
+  if(current>0){
+    current--;
+    render();
+  }
+}
 
 function submitQuiz(){
 
-    if(submitted) return;
+  if(submitted)return;
 
-    submitted = true;
+  submitted=true;
+  clearInterval(clock);
 
-    clearInterval(timer);
+  let score=0;
 
-    const answers = {
-        q1:"C",
-        q2:"B",
-        q3:"B",
-        q4:"B",
-        q5:"B",
-        q6:"B",
-        q7:"B",
-        q8:"C",
-        q9:"B",
-        q10:"C"
-    };
+  questions.forEach((q,i)=>{
+    if(selected[i]===q.a)score++;
+  });
 
-    let score = 0;
+  document.getElementById("questionCard").style.display="none";
+  document.getElementById("nav").style.display="none";
+  document.querySelector(".progress").style.display="none";
+  document.getElementById("controls").style.display="none";
 
-    for(let i=1;i<=10;i++){
+  document.getElementById("score").textContent=
+    `Your Score: ${score} / 10`;
 
-        let selected =
-            document.querySelector(
-                'input[name="q'+i+'"]:checked'
-            );
+  document.getElementById("resultText").textContent=
+    `You scored ${score*10}%. Check your detailed solutions below.`;
 
-        if(selected && selected.value === answers["q"+i]){
-            score++;
-        }
+  let solutionHTML="";
 
-    }
+  questions.forEach((q,i)=>{
 
-    document.getElementById("score").innerHTML =
-        "Your Score: " + score + " / 10";
+    const correct=selected[i]===q.a;
 
-    let percentage = score * 10;
+    const user=
+      selected[i]===null
+      ?"Not Attempted"
+      :q.o[selected[i]];
 
-    document.getElementById("message").innerHTML =
-        "You scored <strong>" +
-        percentage +
-        "%</strong>. Check the detailed solutions below.";
+    solutionHTML+=`
+      <div class="solution">
 
-    document.getElementById("result").style.display = "block";
+        <h3>
+          ${i+1}. ${q.q}
+        </h3>
 
-    document.getElementById("result").scrollIntoView({
-        behavior:"smooth"
-    });
+        <p class="${correct?"correct":"wrong"}">
+          Your Answer: ${user}
+        </p>
 
+        <p style="margin-top:7px">
+          <strong>
+            Correct Answer:
+          </strong>
+          ${String.fromCharCode(65+q.a)}) ${q.o[q.a]}
+        </p>
+
+        <div class="explain">
+          <strong>English Solution:</strong><br>
+          ${q.s}
+        </div>
+
+        <div class="odia">
+          <strong>ଓଡ଼ିଆ Solution:</strong><br>
+          ${q.od}
+        </div>
+
+      </div>
+    `;
+  });
+
+  document.getElementById("solutions").innerHTML=solutionHTML;
+
+  document.getElementById("result").style.display="block";
+
+  document.getElementById("result")
+    .scrollIntoView({behavior:"smooth"});
 }
+
+const clock=setInterval(()=>{
+
+  if(time<=0){
+
+    clearInterval(clock);
+
+    if(!submitted)
+      submitQuiz();
+
+    return;
+  }
+
+  time--;
+
+  const minutes=Math.floor(time/60);
+  const seconds=time%60;
+
+  document.getElementById("timer").textContent=
+    String(minutes).padStart(2,"0")+":"+
+    String(seconds).padStart(2,"0");
+
+  if(time<=60){
+    document.getElementById("timer")
+      .classList.add("warning");
+  }
+
+},1000);
+
+render();
 
 </script>
 
