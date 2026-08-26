@@ -1,1 +1,466 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Study Sathi - Competitive Exam PDF Library</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f5f7fb;
+    color:#172033;
+}
+
+header{
+    background:#ffffff;
+    padding:16px 7%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    box-shadow:0 2px 12px rgba(0,0,0,.08);
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:800;
+    color:#2563eb;
+}
+
+.logo span{
+    color:#111827;
+}
+
+nav a{
+    text-decoration:none;
+    color:#374151;
+    margin-left:22px;
+    font-size:15px;
+    font-weight:600;
+}
+
+.hero{
+    padding:70px 7%;
+    text-align:center;
+    background:linear-gradient(135deg,#eff6ff,#ffffff);
+}
+
+.hero h1{
+    font-size:42px;
+    margin-bottom:15px;
+}
+
+.hero h1 span{
+    color:#2563eb;
+}
+
+.hero p{
+    color:#64748b;
+    font-size:17px;
+    margin-bottom:28px;
+}
+
+.search{
+    max-width:650px;
+    margin:auto;
+    display:flex;
+    background:white;
+    border-radius:14px;
+    padding:7px;
+    box-shadow:0 8px 30px rgba(0,0,0,.1);
+}
+
+.search input{
+    flex:1;
+    border:0;
+    outline:none;
+    padding:15px;
+    font-size:15px;
+}
+
+.search button{
+    border:0;
+    background:#2563eb;
+    color:white;
+    padding:0 25px;
+    border-radius:10px;
+    font-weight:bold;
+}
+
+.section{
+    padding:45px 7%;
+}
+
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.section-title h2{
+    font-size:26px;
+}
+
+.categories{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:15px;
+}
+
+.category{
+    background:white;
+    padding:24px 12px;
+    border-radius:15px;
+    text-align:center;
+    box-shadow:0 5px 20px rgba(0,0,0,.06);
+    cursor:pointer;
+    transition:.2s;
+}
+
+.category:hover{
+    transform:translateY(-4px);
+}
+
+.icon{
+    font-size:30px;
+    margin-bottom:10px;
+}
+
+.category h3{
+    font-size:15px;
+}
+
+.pdf-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:20px;
+}
+
+.pdf-card{
+    background:white;
+    border-radius:16px;
+    padding:20px;
+    box-shadow:0 5px 20px rgba(0,0,0,.07);
+}
+
+.pdf-icon{
+    font-size:38px;
+    margin-bottom:12px;
+}
+
+.pdf-card h3{
+    font-size:17px;
+    margin-bottom:8px;
+}
+
+.pdf-card p{
+    color:#64748b;
+    font-size:13px;
+    margin-bottom:15px;
+}
+
+.badge{
+    display:inline-block;
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:bold;
+    margin-bottom:12px;
+}
+
+.free{
+    background:#dcfce7;
+    color:#15803d;
+}
+
+.premium{
+    background:#fef3c7;
+    color:#b45309;
+}
+
+.download{
+    display:block;
+    text-align:center;
+    text-decoration:none;
+    background:#2563eb;
+    color:white;
+    padding:11px;
+    border-radius:9px;
+    font-size:14px;
+    font-weight:bold;
+}
+
+footer{
+    background:#111827;
+    color:white;
+    text-align:center;
+    padding:35px 20px;
+    margin-top:30px;
+}
+
+footer p{
+    color:#9ca3af;
+    margin-top:8px;
+    font-size:13px;
+}
+
+@media(max-width:600px){
+
+    nav{
+        display:none;
+    }
+
+    .hero{
+        padding:50px 5%;
+    }
+
+    .hero h1{
+        font-size:31px;
+    }
+
+    .section{
+        padding:35px 5%;
+    }
+
+    .search button{
+        padding:0 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">📚 Study <span>Sathi</span></div>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#subjects">Subjects</a>
+        <a href="#pdfs">PDFs</a>
+        <a href="#premium">Premium</a>
+    </nav>
+</header>
+
+
+<section class="hero">
+
+    <h1>Your Smart <span>Study Sathi</span></h1>
+
+    <p>
+        Competitive Exam PDFs, Notes & Mock Tests — All in One Place
+    </p>
+
+    <div class="search">
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search Math, GK, English, Reasoning..."
+            onkeyup="searchPDF()"
+        >
+
+        <button>Search</button>
+    </div>
+
+</section>
+
+
+<section class="section" id="subjects">
+
+    <div class="section-title">
+        <h2>📚 Browse Subjects</h2>
+    </div>
+
+    <div class="categories">
+
+        <div class="category">
+            <div class="icon">📐</div>
+            <h3>Mathematics</h3>
+        </div>
+
+        <div class="category">
+            <div class="icon">🔤</div>
+            <h3>English</h3>
+        </div>
+
+        <div class="category">
+            <div class="icon">🌍</div>
+            <h3>General Knowledge</h3>
+        </div>
+
+        <div class="category">
+            <div class="icon">🧠</div>
+            <h3>Reasoning</h3>
+        </div>
+
+        <div class="category">
+            <div class="icon">🅾️</div>
+            <h3>Odia</h3>
+        </div>
+
+        <div class="category">
+            <div class="icon">💻</div>
+            <h3>Computer</h3>
+        </div>
+
+        <div class="category">
+            <div class="icon">📰</div>
+            <h3>Current Affairs</h3>
+        </div>
+
+        <div class="category">
+            <div class="icon">🏛️</div>
+            <h3>Odisha GK</h3>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="section" id="pdfs">
+
+    <div class="section-title">
+        <h2>📄 Latest PDFs</h2>
+    </div>
+
+    <div class="pdf-grid" id="pdfGrid">
+
+        <div class="pdf-card" data-name="mathematics arithmetic">
+            <div class="pdf-icon">📕</div>
+            <span class="badge free">FREE</span>
+            <h3>Arithmetic Practice Set</h3>
+            <p>Important Mathematics questions for competitive exams.</p>
+            <a class="download" href="#">View PDF</a>
+        </div>
+
+        <div class="pdf-card" data-name="english vocabulary">
+            <div class="pdf-icon">📘</div>
+            <span class="badge premium">PREMIUM</span>
+            <h3>Top 500 English Vocabulary</h3>
+            <p>Important vocabulary for SSC, OSSC and Railway exams.</p>
+            <a class="download" href="#">₹29 • Get PDF</a>
+        </div>
+
+        <div class="pdf-card" data-name="gk general knowledge">
+            <div class="pdf-icon">📗</div>
+            <span class="badge free">FREE</span>
+            <h3>General Knowledge 100 MCQ</h3>
+            <p>High-quality GK questions for competitive exams.</p>
+            <a class="download" href="#">View PDF</a>
+        </div>
+
+        <div class="pdf-card" data-name="reasoning">
+            <div class="pdf-icon">📙</div>
+            <span class="badge premium">PREMIUM</span>
+            <h3>Reasoning Practice Set</h3>
+            <p>Important reasoning questions with solutions.</p>
+            <a class="download" href="#">₹19 • Get PDF</a>
+        </div>
+
+        <div class="pdf-card" data-name="odia odisha gk">
+            <div class="pdf-icon">📔</div>
+            <span class="badge free">FREE</span>
+            <h3>Odisha GK Special</h3>
+            <p>Important Odisha GK questions for Odisha exams.</p>
+            <a class="download" href="#">View PDF</a>
+        </div>
+
+        <div class="pdf-card" data-name="computer computer science">
+            <div class="pdf-icon">💻</div>
+            <span class="badge premium">PREMIUM</span>
+            <h3>Computer 300 MCQ</h3>
+            <p>Computer questions for SSC, OSSC and Railway exams.</p>
+            <a class="download" href="#">₹29 • Get PDF</a>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="section" id="premium">
+
+    <div class="section-title">
+        <h2>💎 Study Sathi Premium</h2>
+    </div>
+
+    <div class="pdf-grid">
+
+        <div class="pdf-card">
+            <div class="pdf-icon">🚀</div>
+            <h3>Complete SSC Pack</h3>
+            <p>Math + English + GK + Reasoning PDFs.</p>
+            <a class="download" href="#">Explore Premium</a>
+        </div>
+
+        <div class="pdf-card">
+            <div class="pdf-icon">🎯</div>
+            <h3>OSSC Exam Pack</h3>
+            <p>Odisha GK + Current Affairs + Mock Tests.</p>
+            <a class="download" href="#">Explore Premium</a>
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <h3>📚 Study Sathi</h3>
+
+    <p>
+        Your Complete Competitive Exam PDF Library
+    </p>
+
+    <p>
+        © 2026 Study Sathi. All Rights Reserved.
+    </p>
+
+</footer>
+
+
+<script>
+
+function searchPDF(){
+
+    let input =
+        document.getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+    let cards =
+        document.querySelectorAll(".pdf-card");
+
+    cards.forEach(function(card){
+
+        let name =
+            card.getAttribute("data-name") || "";
+
+        if(name.includes(input)){
+            card.style.display = "block";
+        }
+        else{
+            card.style.display = "none";
+        }
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>
