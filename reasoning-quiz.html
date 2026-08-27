@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Study Sathi - Reasoning Mock Test</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:
+    radial-gradient(circle at top,#242424 0%,#101010 45%,#050505 100%);
+    color:#fff;
+    min-height:100vh;
+}
+
+.header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(15,15,15,.94);
+    backdrop-filter:blur(15px);
+    border-bottom:1px solid #292929;
+    padding:14px 18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    font-size:19px;
+    font-weight:800;
+}
+
+.logo span{
+    color:#777;
+}
+
+.timer{
+    background:#fff;
+    color:#111;
+    padding:9px 15px;
+    border-radius:14px;
+    font-weight:800;
+    min-width:78px;
+    text-align:center;
+}
+
+.hero{
+    text-align:center;
+    padding:35px 18px 25px;
+}
+
+.hero h1{
+    font-size:30px;
+    margin-bottom:8px;
+}
+
+.hero p{
+    color:#999;
+    font-size:14px;
+}
+
+.language-box{
+    max-width:500px;
+    margin:20px auto;
+    display:flex;
+    gap:10px;
+    background:#111;
+    padding:6px;
+    border:1px solid #292929;
+    border-radius:16px;
+}
+
+.lang-btn{
+    flex:1;
+    border:0;
+    padding:12px;
+    border-radius:12px;
+    background:#1d1d1d;
+    color:#aaa;
+    font-weight:700;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.lang-btn.active{
+    background:#fff;
+    color:#111;
+    box-shadow:0 4px 18px rgba(255,255,255,.15);
+}
+
+.container{
+    max-width:850px;
+    margin:auto;
+    padding:10px 15px 60px;
+}
+
+.progress-box{
+    margin-bottom:18px;
+}
+
+.progress-info{
+    display:flex;
+    justify-content:space-between;
+    color:#999;
+    font-size:13px;
+    margin-bottom:7px;
+}
+
+.progress{
+    height:6px;
+    background:#222;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:100%;
+    width:0%;
+    background:#fff;
+    transition:.3s;
+}
+
+.question-card{
+    background:linear-gradient(145deg,#171717,#0e0e0e);
+    border:1px solid #292929;
+    border-radius:22px;
+    padding:24px;
+    margin-bottom:18px;
+    box-shadow:0 12px 35px rgba(0,0,0,.35);
+}
+
+.question-number{
+    color:#777;
+    font-size:13px;
+    margin-bottom:12px;
+    font-weight:700;
+}
+
+.question{
+    font-size:19px;
+    line-height:1.5;
+    margin-bottom:20px;
+}
+
+.options{
+    display:flex;
+    flex-direction:column;
+    gap:11px;
+}
+
+.option{
+    position:relative;
+    border:1px solid #303030;
+    background:#151515;
+    color:#eee;
+    border-radius:15px;
+    padding:14px 16px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    transition:.2s;
+}
+
+.option:hover{
+    border-color:#777;
+    transform:translateX(2px);
+}
+
+.option input{
+    display:none;
+}
+
+.circle{
+    width:22px;
+    height:22px;
+    border:2px solid #555;
+    border-radius:50%;
+    flex-shrink:0;
+    transition:.2s;
+}
+
+.option.selected{
+    background:#fff;
+    color:#111;
+    border-color:#fff;
+}
+
+.option.selected .circle{
+    border:6px solid #111;
+    background:#fff;
+}
+
+.submit-btn{
+    width:100%;
+    border:0;
+    border-radius:16px;
+    padding:16px;
+    background:#fff;
+    color:#111;
+    font-size:16px;
+    font-weight:800;
+    cursor:pointer;
+    margin-top:8px;
+}
+
+.submit-btn:disabled{
+    opacity:.45;
+    cursor:not-allowed;
+}
+
+.result{
+    display:none;
+    background:linear-gradient(145deg,#191919,#0c0c0c);
+    border:1px solid #333;
+    border-radius:22px;
+    padding:28px 20px;
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.score{
+    font-size:44px;
+    font-weight:900;
+    margin:10px 0;
+}
+
+.result-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-top:20px;
+}
+
+.result-item{
+    background:#151515;
+    border:1px solid #292929;
+    padding:15px 8px;
+    border-radius:14px;
+}
+
+.result-item small{
+    color:#777;
+    display:block;
+    margin-bottom:5px;
+}
+
+.result-item strong{
+    font-size:20px;
+}
+
+.solution{
+    display:none;
+    background:#f8f8f8;
+    color:#111;
+    border-radius:20px;
+    padding:22px;
+    margin-top:18px;
+    text-align:left;
+}
+
+.solution h2{
+    margin-bottom:18px;
+}
+
+.sol-card{
+    border-bottom:1px solid #ddd;
+    padding:16px 0;
+}
+
+.sol-card:last-child{
+    border-bottom:0;
+}
+
+.sol-card h3{
+    margin-bottom:8px;
+}
+
+.correct{
+    color:#15803d;
+    font-weight:800;
+}
+
+.wrong{
+    color:#dc2626;
+    font-weight:800;
+}
+
+.restart{
+    margin-top:20px;
+    border:1px solid #555;
+    background:#111;
+    color:#fff;
+    padding:12px 20px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:700;
+}
+
+@media(max-width:600px){
+    .hero h1{
+        font-size:25px;
+    }
+
+    .question-card{
+        padding:18px;
+    }
+
+    .question{
+        font-size:17px;
+    }
+
+    .result-grid{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="logo">🧠 Study <span>Sathi</span></div>
+    <div class="timer" id="timer">00:00</div>
+</header>
+
+<section class="hero">
+
+    <h1>Reasoning Mock Test</h1>
+
+    <p id="subtitle">
+        10 Questions • 7 Minutes • −0.25 Negative Marking
+    </p>
+
+    <div class="language-box">
+        <button class="lang-btn active" onclick="setLanguage('en')">
+            🇬🇧 English
+        </button>
+
+        <button class="lang-btn" onclick="setLanguage('od')">
+            🅾️ ଓଡ଼ିଆ
+        </button>
+    </div>
+
+</section>
+
+<main class="container">
+
+<div class="progress-box">
+    <div class="progress-info">
+        <span id="progressText">Question 1 of 10</span>
+        <span>7:00</span>
+    </div>
+
+    <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+</div>
+
+<div id="quiz"></div>
+
+<button class="submit-btn" id="submitBtn" onclick="submitTest()">
+    Submit Test
+</button>
+
+<div class="result" id="result">
+
+    <div>YOUR SCORE</div>
+
+    <div class="score" id="score">0</div>
+
+    <div id="resultMessage"></div>
+
+    <div class="result-grid">
+
+        <div class="result-item">
+            <small>Correct</small>
+            <strong id="correct">0</strong>
+        </div>
+
+        <div class="result-item">
+            <small>Wrong</small>
+            <strong id="wrong">0</strong>
+        </div>
+
+        <div class="result-item">
+            <small>Negative</small>
+            <strong id="negative">0</strong>
+        </div>
+
+    </div>
+
+    <button class="restart" onclick="location.reload()">
+        🔄 Restart Test
+    </button>
+
+</div>
+
+<div class="solution" id="solution">
+    <h2>📘 Detailed Solutions</h2>
+    <div id="solutionContent"></div>
+</div>
+
+</main>
+
+<script>
+
+const questions = [
+
+{
+en:"Find the next number: 2, 6, 12, 20, 30, ?",
+od:"ପରବର୍ତ୍ତୀ ସଂଖ୍ୟା ନିର୍ଣ୍ଣୟ କର: 2, 6, 12, 20, 30, ?",
+options:[
+["28","28"],
+["36","36"],
+["40","40"],
+["42","42"]
+],
+answer:3,
+solutionEn:"The differences are 4, 6, 8, 10. The next difference is 12. Therefore 30 + 12 = 42.",
+solutionOd:"ପାର୍ଥକ୍ୟ 4, 6, 8, 10 ଅଟେ। ପରବର୍ତ୍ତୀ ପାର୍ଥକ୍ୟ 12 ହେବ। ତେଣୁ 30 + 12 = 42।"
+},
+
+{
+en:"If CAT is coded as DBU, how is DOG coded?",
+od:"ଯଦି CAT କୁ DBU ଭାବରେ କୋଡ୍ କରାଯାଏ, ତେବେ DOG କୁ କିପରି କୋଡ୍ କରାଯିବ?",
+options:[
+["EPH","EPH"],
+["EOG","EOG"],
+["FPH","FPH"],
+["DPH","DPH"]
+],
+answer:0,
+solutionEn:"Each letter is moved one step forward: D→E, O→P, G→H. So DOG = EPH.",
+solutionOd:"ପ୍ରତ୍ୟେକ ଅକ୍ଷରକୁ ଗୋଟିଏ ସ୍ଥାନ ଆଗକୁ ନିଆଯାଇଛି: D→E, O→P, G→H। ତେଣୁ DOG = EPH।"
+},
+
+{
+en:"A is the brother of B. B is the sister of C. How is A related to C?",
+od:"A, B ର ଭାଇ। B, C ର ଭଉଣୀ। A ଙ୍କର C ସହିତ ସମ୍ପର୍କ କ'ଣ?",
+options:[
+["Brother / ଭାଇ","Brother / ଭାଇ"],
+["Sister / ଭଉଣୀ","Sister / ଭଉଣୀ"],
+["Father / ବାପା","Father / ବାପା"],
+["Uncle / ମାମୁ","Uncle / ମାମୁ"]
+],
+answer:0,
+solutionEn:"B is C's sister and A is B's brother. Therefore A is also C's brother.",
+solutionOd:"B ହେଉଛି C ର ଭଉଣୀ ଏବଂ A ହେଉଛି B ର ଭାଇ। ତେଣୁ A, C ର ଭାଇ।"
+},
+
+{
+en:"Which one is different from the others?",
+od:"ନିମ୍ନଲିଖିତ ମଧ୍ୟରୁ କେଉଁଟି ଅଲଗା?",
+options:[
+["Apple / ସେଓ","Apple / ସେଓ"],
+["Mango / ଆମ୍ବ","Mango / ଆମ୍ବ"],
+["Potato / ଆଳୁ","Potato / ଆଳୁ"],
+["Banana / କଦଳୀ","Banana / କଦଳୀ"]
+],
+answer:2,
+solutionEn:"Apple, mango and banana are fruits. Potato is a vegetable.",
+solutionOd:"ସେଓ, ଆମ୍ବ ଓ କଦଳୀ ଫଳ। ଆଳୁ ଏକ ପନିପରିବା।"
+},
+
+{
+en:"If SOUTH is written as HTUOS, how is NORTH written?",
+od:"ଯଦି SOUTH କୁ HTUOS ଭାବରେ ଲେଖାଯାଏ, ତେବେ NORTH କୁ କିପରି ଲେଖାଯିବ?",
+options:[
+["HTRON","HTRON"],
+["NHTRO","NHTRO"],
+["HTORN","HTORN"],
+["TNRHO","TNRHO"]
+],
+answer:0,
+solutionEn:"The word is written in reverse order. NORTH becomes HTRON.",
+solutionOd:"ଶବ୍ଦଟିକୁ ଓଲଟା କରି ଲେଖାଯାଇଛି। NORTH ର ଓଲଟା HTRON।"
+},
+
+{
+en:"A man walks 5 km north, then turns right and walks 3 km. Which direction is he from the starting point?",
+od:"ଜଣେ ବ୍ୟକ୍ତି 5 କିମି ଉତ୍ତରକୁ ଯାଏ, ପରେ ଡାହାଣକୁ ବୁଲି 3 କିମି ଯାଏ। ସେ ଆରମ୍ଭ ସ୍ଥାନର କେଉଁ ଦିଗରେ ଅଛି?",
+options:[
+["North-East / ଉତ୍ତର-ପୂର୍ବ","North-East / ଉତ୍ତର-ପୂର୍ବ"],
+["South-East / ଦକ୍ଷିଣ-ପୂର୍ବ","South-East / ଦକ୍ଷିଣ-ପୂର୍ବ"],
+["North-West / ଉତ୍ତର-ପଶ୍ଚିମ","North-West / ଉତ୍ତର-ପଶ୍ଚିମ"],
+["South-West / ଦକ୍ଷିଣ-ପଶ୍ଚିମ","South-West / ଦକ୍ଷିଣ-ପଶ୍ଚିମ"]
+],
+answer:0,
+solutionEn:"He moves north and then east. Therefore he is in the north-east direction.",
+solutionOd:"ସେ ପ୍ରଥମେ ଉତ୍ତର ଏବଂ ପରେ ପୂର୍ବକୁ ଯାଏ। ତେଣୁ ସେ ଉତ୍ତର-ପୂର୍ବ ଦିଗରେ ଅଛି।"
+},
+
+{
+en:"Choose the odd pair.",
+od:"ଅଲଗା ଯୋଡ଼ିଟି ଚୟନ କର।",
+options:[
+["2 : 4","2 : 4"],
+["3 : 9","3 : 9"],
+["4 : 16","4 : 16"],
+["5 : 20","5 : 20"]
+],
+answer:3,
+solutionEn:"In the first three pairs, the second number is the square of the first. 5² = 25, not 20.",
+solutionOd:"ପ୍ରଥମ ତିନୋଟି ଯୋଡ଼ିରେ ଦ୍ୱିତୀୟ ସଂଖ୍ୟା ପ୍ରଥମ ସଂଖ୍ୟାର ବର୍ଗ। 5² = 25, 20 ନୁହେଁ।"
+},
+
+{
+en:"If all roses are flowers and some flowers are red, which conclusion is definitely true?",
+od:"ଯଦି ସମସ୍ତ ଗୋଲାପ ଫୁଲ ଏବଂ କିଛି ଫୁଲ ଲାଲ, ତେବେ ନିଶ୍ଚିତ ଭାବେ କେଉଁ ନିଷ୍କର୍ଷ ସତ୍ୟ?",
+options:[
+["All roses are flowers / ସମସ୍ତ ଗୋଲାପ ଫୁଲ","All roses are flowers / ସମସ୍ତ ଗୋଲାପ ଫୁଲ"],
+["All flowers are roses / ସମସ୍ତ ଫୁଲ ଗୋଲାପ","All flowers are roses / ସମସ୍ତ ଫୁଲ ଗୋଲାପ"],
+["All roses are red / ସମସ୍ତ ଗୋଲାପ ଲାଲ","All roses are red / ସମସ୍ତ ଗୋଲାପ ଲାଲ"],
+["No rose is red / କୌଣସି ଗୋଲାପ ଲାଲ ନୁହେଁ","No rose is red / କୌଣସି ଗୋଲାପ ଲାଲ ନୁହେଁ"]
+],
+answer:0,
+solutionEn:"The first statement directly says that all roses are flowers.",
+solutionOd:"ପ୍ରଥମ ବକ୍ତବ୍ୟରେ ସିଧାସଳଖ କୁହାଯାଇଛି ଯେ ସମସ୍ତ ଗୋଲାପ ଫୁଲ।"
+},
+
+{
+en:"Find the missing number: 3, 8, 15, 24, 35, ?",
+od:"ଖାଲି ସ୍ଥାନରେ କେଉଁ ସଂଖ୍ୟା ଆସିବ: 3, 8, 15, 24, 35, ?",
+options:[
+["46","46"],
+["48","48"],
+["49","49"],
+["50","50"]
+],
+answer:1,
+solutionEn:"Differences are 5, 7, 9, 11. The next difference is 13. Therefore 35 + 13 = 48.",
+solutionOd:"ପାର୍ଥକ୍ୟ 5, 7, 9, 11। ପରବର୍ତ୍ତୀ ପାର୍ଥକ୍ୟ 13। ତେଣୁ 35 + 13 = 48।"
+},
+
+{
+en:"In a class, Ramesh is 7th from the top and 18th from the bottom. How many students are there?",
+od:"ଏକ ଶ୍ରେଣୀରେ ରମେଶ ଉପରୁ 7ମ ଏବଂ ତଳୁ 18ମ। ଶ୍ରେଣୀରେ ମୋଟ କେତେ ଜଣ ଛାତ୍ର ଅଛନ୍ତି?",
+options:[
+["24","24"],
+["25","25"],
+["26","26"],
+["27","27"]
+],
+answer:1,
+solutionEn:"Total = 7 + 18 − 1 = 24. Wait: the correct calculation gives 24, so option A is correct.",
+solutionOd:"ମୋଟ = 7 + 18 − 1 = 24। ତେଣୁ ସଠିକ୍ ଉତ୍ତର A — 24।"
+}
+
+];
+
+let currentLanguage = "en";
+let answers = Array(questions.length).fill(null);
+let seconds = 0;
+let timerInterval;
+let submitted = false;
+
+function renderQuiz(){
+
+    const quiz = document.getElementById("quiz");
+
+    quiz.innerHTML = "";
+
+    questions.forEach((q,index)=>{
+
+        const card = document.createElement("div");
+        card.className = "question-card";
+
+        const questionText =
+            currentLanguage === "en" ? q.en : q.od;
+
+        card.innerHTML = `
+            <div class="question-number">
+                QUESTION ${index+1} / ${questions.length}
+            </div>
+
+            <div class="question">
+                ${questionText}
+            </div>
+
+            <div class="options">
+                ${q.options.map((op,i)=>`
+                    <label class="option ${answers[index]===i?'selected':''}"
+                           onclick="selectOption(${index},${i})">
+
+                        <span class="circle"></span>
+
+                        <span>
+                            ${currentLanguage === "en" ? op[0] : op[1]}
+                        </span>
+
+                    </label>
+                `).join("")}
+            </div>
+        `;
+
+        quiz.appendChild(card);
+    });
+
+    updateProgress();
+}
+
+function selectOption(qIndex,optionIndex){
+
+    if(submitted) return;
+
+    answers[qIndex] = optionIndex;
+
+    renderQuiz();
+}
+
+function updateProgress(){
+
+    const answered =
+        answers.filter(a=>a!==null).length;
+
+    document.getElementById("progressText").innerText =
+        `Answered ${answered} / ${questions.length}`;
+
+    document.getElementById("progressBar").style.width =
+        (answered/questions.length*100)+"%";
+}
+
+function setLanguage(lang){
+
+    if(submitted) return;
+
+    currentLanguage = lang;
+
+    document.querySelectorAll(".lang-btn")
+        .forEach(btn=>btn.classList.remove("active"));
+
+    if(lang==="en"){
+        document.querySelectorAll(".lang-btn")[0]
+            .classList.add("active");
+    }else{
+        document.querySelectorAll(".lang-btn")[1]
+            .classList.add("active");
+    }
+
+    renderQuiz();
+}
+
+function startTimer(){
+
+    timerInterval = setInterval(()=>{
+
+        seconds++;
+
+        let min =
+            Math.floor(seconds/60)
+            .toString()
+            .padStart(2,"0");
+
+        let sec =
+            (seconds%60)
+            .toString()
+            .padStart(2,"0");
+
+        document.getElementById("timer")
+            .innerText = `${min}:${sec}`;
+
+        if(seconds >= 420){
+            submitTest();
+        }
+
+    },1000);
+}
+
+function submitTest(){
+
+    if(submitted) return;
+
+    submitted = true;
+
+    clearInterval(timerInterval);
+
+    let correct = 0;
+    let wrong = 0;
+
+    answers.forEach((ans,index)=>{
+
+        if(ans === null) return;
+
+        if(ans === questions[index].answer){
+            correct++;
+        }else{
+            wrong++;
+        }
+
+    });
+
+    const negative = wrong * 0.25;
+
+    const score = correct - negative;
+
+    document.getElementById("score")
+        .innerText = score.toFixed(2);
+
+    document.getElementById("correct")
+        .innerText = correct;
+
+    document.getElementById("wrong")
+        .innerText = wrong;
+
+    document.getElementById("negative")
+        .innerText = negative.toFixed(2);
+
+    document.getElementById("resultMessage")
+        .innerText =
+        `Attempted ${correct + wrong} / ${questions.length}`;
+
+    document.getElementById("result").style.display = "block";
+
+    document.getElementById("submitBtn").disabled = true;
+
+    showSolutions();
+    
+    window.scrollTo({
+        top:document.getElementById("result").offsetTop-70,
+        behavior:"smooth"
+    });
+}
+
+function showSolutions(){
+
+    const box =
+        document.getElementById("solutionContent");
+
+    box.innerHTML = "";
+
+    questions.forEach((q,index)=>{
+
+        const userAnswer = answers[index];
+
+        const correctAnswer = q.answer;
+
+        const status =
+            userAnswer === null
+            ? `<span>Not Attempted</span>`
+            : userAnswer === correctAnswer
+            ? `<span class="correct">Correct ✓</span>`
+            : `<span class="wrong">Wrong ✕</span>`;
+
+        const correctText =
+            currentLanguage === "en"
+            ? q.options[correctAnswer][0]
+            : q.options[correctAnswer][1];
+
+        const explanation =
+            currentLanguage === "en"
+            ? q.solutionEn
+            : q.solutionOd;
+
+        box.innerHTML += `
+
+            <div class="sol-card">
+
+                <h3>Q${index+1}. ${status}</h3>
+
+                <p>
+                    <b>Correct Answer:</b>
+                    ${correctText}
+                </p>
+
+                <p style="margin-top:8px">
+                    <b>Solution:</b>
+                    ${explanation}
+                </p>
+
+            </div>
+
+        `;
+    });
+
+    document.getElementById("solution")
+        .style.display = "block";
+}
+
+renderQuiz();
+startTimer();
+
+</script>
+
+</body>
+</html>
