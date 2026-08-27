@@ -3,325 +3,378 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Study Sathi - Reasoning Mock Test</title>
+<title>Study Sathi | Reasoning Mock Test</title>
 
 <style>
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    font-family:Arial,Helvetica,sans-serif;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
 body{
-    background:
-    radial-gradient(circle at top,#242424 0%,#101010 45%,#050505 100%);
-    color:#fff;
-    min-height:100vh;
+  font-family:Arial,Helvetica,sans-serif;
+  background:
+    radial-gradient(circle at top,#252525 0%,#0d0d0d 42%,#000 100%);
+  color:#fff;
+  min-height:100vh;
 }
 
 .header{
-    position:sticky;
-    top:0;
-    z-index:100;
-    background:rgba(15,15,15,.94);
-    backdrop-filter:blur(15px);
-    border-bottom:1px solid #292929;
-    padding:14px 18px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+  position:sticky;
+  top:0;
+  z-index:100;
+  height:70px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 6%;
+  background:rgba(5,5,5,.94);
+  border-bottom:1px solid #292929;
+  backdrop-filter:blur(14px);
 }
 
 .logo{
-    font-size:19px;
-    font-weight:800;
+  font-size:21px;
+  font-weight:800;
 }
 
 .logo span{
-    color:#777;
+  color:#777;
 }
 
 .timer{
-    background:#fff;
-    color:#111;
-    padding:9px 15px;
-    border-radius:14px;
-    font-weight:800;
-    min-width:78px;
-    text-align:center;
+  min-width:95px;
+  padding:10px 15px;
+  text-align:center;
+  border:1px solid #444;
+  border-radius:14px;
+  background:#151515;
+  font-weight:800;
+  letter-spacing:.5px;
+}
+
+.timer.warning{
+  background:#fff;
+  color:#000;
+  border-color:#fff;
 }
 
 .hero{
-    text-align:center;
-    padding:35px 18px 25px;
+  text-align:center;
+  padding:32px 15px 22px;
 }
 
 .hero h1{
-    font-size:30px;
-    margin-bottom:8px;
+  font-size:29px;
+  margin-bottom:8px;
 }
 
 .hero p{
-    color:#999;
-    font-size:14px;
+  color:#999;
+  font-size:14px;
 }
 
 .language-box{
-    max-width:500px;
-    margin:20px auto;
-    display:flex;
-    gap:10px;
-    background:#111;
-    padding:6px;
-    border:1px solid #292929;
-    border-radius:16px;
+  width:min(420px,92%);
+  margin:20px auto 0;
+  padding:5px;
+  display:flex;
+  gap:5px;
+  background:#111;
+  border:1px solid #292929;
+  border-radius:16px;
 }
 
 .lang-btn{
-    flex:1;
-    border:0;
-    padding:12px;
-    border-radius:12px;
-    background:#1d1d1d;
-    color:#aaa;
-    font-weight:700;
-    cursor:pointer;
-    transition:.25s;
+  flex:1;
+  border:0;
+  border-radius:12px;
+  padding:11px;
+  background:#191919;
+  color:#999;
+  font-weight:800;
+  cursor:pointer;
 }
 
 .lang-btn.active{
-    background:#fff;
-    color:#111;
-    box-shadow:0 4px 18px rgba(255,255,255,.15);
+  background:#fff;
+  color:#000;
 }
 
 .container{
-    max-width:850px;
-    margin:auto;
-    padding:10px 15px 60px;
-}
-
-.progress-box{
-    margin-bottom:18px;
+  width:min(850px,94%);
+  margin:auto;
+  padding:10px 0 60px;
 }
 
 .progress-info{
-    display:flex;
-    justify-content:space-between;
-    color:#999;
-    font-size:13px;
-    margin-bottom:7px;
+  display:flex;
+  justify-content:space-between;
+  color:#999;
+  font-size:13px;
+  margin-bottom:7px;
 }
 
 .progress{
-    height:6px;
-    background:#222;
-    border-radius:10px;
-    overflow:hidden;
+  height:5px;
+  background:#222;
+  border-radius:20px;
+  overflow:hidden;
+  margin-bottom:18px;
 }
 
 .progress-bar{
-    height:100%;
-    width:0%;
-    background:#fff;
-    transition:.3s;
+  height:100%;
+  width:0%;
+  background:#fff;
+  transition:.25s;
 }
 
 .question-card{
-    background:linear-gradient(145deg,#171717,#0e0e0e);
-    border:1px solid #292929;
-    border-radius:22px;
-    padding:24px;
-    margin-bottom:18px;
-    box-shadow:0 12px 35px rgba(0,0,0,.35);
+  background:#fff;
+  color:#111;
+  border-radius:24px;
+  padding:30px;
+  min-height:450px;
+  box-shadow:0 20px 65px rgba(0,0,0,.55);
+  animation:slide .25s ease;
 }
 
-.question-number{
-    color:#777;
-    font-size:13px;
-    margin-bottom:12px;
-    font-weight:700;
+@keyframes slide{
+  from{
+    opacity:0;
+    transform:translateX(20px);
+  }
+  to{
+    opacity:1;
+    transform:translateX(0);
+  }
+}
+
+.q-number{
+  color:#777;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:1px;
+  margin-bottom:15px;
 }
 
 .question{
-    font-size:19px;
-    line-height:1.5;
-    margin-bottom:20px;
+  font-size:21px;
+  line-height:1.55;
+  font-weight:700;
+  margin-bottom:25px;
 }
 
 .options{
-    display:flex;
-    flex-direction:column;
-    gap:11px;
+  display:grid;
+  gap:12px;
 }
 
 .option{
-    position:relative;
-    border:1px solid #303030;
-    background:#151515;
-    color:#eee;
-    border-radius:15px;
-    padding:14px 16px;
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    gap:12px;
-    transition:.2s;
+  width:100%;
+  min-height:58px;
+  display:flex;
+  align-items:center;
+  gap:13px;
+  padding:14px 16px;
+  border:1.5px solid #ddd;
+  border-radius:16px;
+  background:#fafafa;
+  color:#111;
+  cursor:pointer;
+  text-align:left;
+  transition:.2s;
 }
 
 .option:hover{
-    border-color:#777;
-    transform:translateX(2px);
-}
-
-.option input{
-    display:none;
-}
-
-.circle{
-    width:22px;
-    height:22px;
-    border:2px solid #555;
-    border-radius:50%;
-    flex-shrink:0;
-    transition:.2s;
+  background:#f2f2f2;
+  border-color:#999;
+  transform:translateY(-1px);
 }
 
 .option.selected{
-    background:#fff;
-    color:#111;
-    border-color:#fff;
+  background:#eeeeee;
+  border-color:#111;
+  box-shadow:
+    0 0 0 3px rgba(0,0,0,.06),
+    0 8px 22px rgba(0,0,0,.09);
 }
 
-.option.selected .circle{
-    border:6px solid #111;
-    background:#fff;
+.radio{
+  width:23px;
+  height:23px;
+  min-width:23px;
+  border:2px solid #999;
+  border-radius:50%;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-.submit-btn{
-    width:100%;
-    border:0;
-    border-radius:16px;
-    padding:16px;
-    background:#fff;
-    color:#111;
-    font-size:16px;
-    font-weight:800;
-    cursor:pointer;
-    margin-top:8px;
+.option.selected .radio{
+  border-color:#111;
 }
 
-.submit-btn:disabled{
-    opacity:.45;
-    cursor:not-allowed;
+.option.selected .radio::after{
+  content:"";
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:#111;
+}
+
+.letter{
+  font-weight:800;
+  margin-right:5px;
+}
+
+.navigation{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  margin-top:18px;
+}
+
+.btn{
+  padding:13px 21px;
+  border-radius:13px;
+  border:1px solid #444;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.prev{
+  background:#151515;
+  color:#fff;
+}
+
+.next,
+.submit{
+  background:#fff;
+  color:#000;
+}
+
+.submit{
+  display:none;
 }
 
 .result{
-    display:none;
-    background:linear-gradient(145deg,#191919,#0c0c0c);
-    border:1px solid #333;
-    border-radius:22px;
-    padding:28px 20px;
-    text-align:center;
-    margin-bottom:25px;
+  display:none;
+  background:#fff;
+  color:#111;
+  border-radius:24px;
+  padding:30px 22px;
+  margin-top:20px;
 }
 
 .score{
-    font-size:44px;
-    font-weight:900;
-    margin:10px 0;
+  text-align:center;
+  font-size:42px;
+  font-weight:900;
+}
+
+.result-title{
+  text-align:center;
+  color:#777;
+  font-size:13px;
+  margin-bottom:8px;
+}
+
+.result-message{
+  text-align:center;
+  color:#666;
+  margin:8px 0 25px;
 }
 
 .result-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:10px;
-    margin-top:20px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
 }
 
-.result-item{
-    background:#151515;
-    border:1px solid #292929;
-    padding:15px 8px;
-    border-radius:14px;
+.result-box{
+  text-align:center;
+  background:#f5f5f5;
+  border-radius:14px;
+  padding:15px 8px;
 }
 
-.result-item small{
-    color:#777;
-    display:block;
-    margin-bottom:5px;
+.result-box small{
+  display:block;
+  color:#777;
+  margin-bottom:5px;
 }
 
-.result-item strong{
-    font-size:20px;
+.result-box strong{
+  font-size:20px;
+}
+
+.solutions{
+  margin-top:28px;
+}
+
+.solutions h2{
+  margin-bottom:15px;
 }
 
 .solution{
-    display:none;
-    background:#f8f8f8;
-    color:#111;
-    border-radius:20px;
-    padding:22px;
-    margin-top:18px;
-    text-align:left;
-}
-
-.solution h2{
-    margin-bottom:18px;
-}
-
-.sol-card{
-    border-bottom:1px solid #ddd;
-    padding:16px 0;
-}
-
-.sol-card:last-child{
-    border-bottom:0;
-}
-
-.sol-card h3{
-    margin-bottom:8px;
+  padding:20px 0;
+  border-top:1px solid #ddd;
+  line-height:1.6;
 }
 
 .correct{
-    color:#15803d;
-    font-weight:800;
+  color:#15803d;
+  font-weight:800;
 }
 
 .wrong{
-    color:#dc2626;
-    font-weight:800;
+  color:#dc2626;
+  font-weight:800;
+}
+
+.explanation{
+  margin-top:10px;
+  padding:13px;
+  background:#f4f4f4;
+  border-radius:10px;
 }
 
 .restart{
-    margin-top:20px;
-    border:1px solid #555;
-    background:#111;
-    color:#fff;
-    padding:12px 20px;
-    border-radius:12px;
-    cursor:pointer;
-    font-weight:700;
+  width:100%;
+  margin-top:20px;
+  background:#111;
+  color:#fff;
 }
 
 @media(max-width:600px){
-    .hero h1{
-        font-size:25px;
-    }
 
-    .question-card{
-        padding:18px;
-    }
+  .header{
+    padding:0 4%;
+  }
 
-    .question{
-        font-size:17px;
-    }
+  .logo{
+    font-size:18px;
+  }
 
-    .result-grid{
-        grid-template-columns:1fr;
-    }
+  .hero h1{
+    font-size:24px;
+  }
+
+  .question-card{
+    padding:22px;
+  }
+
+  .question{
+    font-size:19px;
+  }
+
+  .result-grid{
+    grid-template-columns:1fr;
+  }
 }
 </style>
 </head>
@@ -329,86 +382,123 @@ body{
 <body>
 
 <header class="header">
-    <div class="logo">🧠 Study <span>Sathi</span></div>
-    <div class="timer" id="timer">00:00</div>
+
+  <div class="logo">
+    🧠 Study <span>Sathi</span>
+  </div>
+
+  <div class="timer" id="timer">
+    00:00
+  </div>
+
 </header>
 
 <section class="hero">
 
-    <h1>Reasoning Mock Test</h1>
+  <h1>🧠 Reasoning Mock Test</h1>
 
-    <p id="subtitle">
-        10 Questions • 7 Minutes • −0.25 Negative Marking
-    </p>
+  <p>
+    10 Questions • 7 Minutes • +1 Correct • −0.25 Wrong
+  </p>
 
-    <div class="language-box">
-        <button class="lang-btn active" onclick="setLanguage('en')">
-            🇬🇧 English
-        </button>
+  <div class="language-box">
 
-        <button class="lang-btn" onclick="setLanguage('od')">
-            🅾️ ଓଡ଼ିଆ
-        </button>
-    </div>
+    <button class="lang-btn active"
+            id="englishBtn"
+            onclick="changeLanguage('en')">
+      🇬🇧 English
+    </button>
+
+    <button class="lang-btn"
+            id="odiaBtn"
+            onclick="changeLanguage('od')">
+      ଓଡ଼ିଆ
+    </button>
+
+  </div>
 
 </section>
 
 <main class="container">
 
-<div class="progress-box">
-    <div class="progress-info">
-        <span id="progressText">Question 1 of 10</span>
-        <span>7:00</span>
+  <div class="progress-info">
+    <span id="progressText">Question 1 of 10</span>
+    <span>Time: 07:00</span>
+  </div>
+
+  <div class="progress">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div class="navigation">
+
+    <button class="btn prev"
+            id="prevBtn"
+            onclick="previousQuestion()">
+      ← Previous
+    </button>
+
+    <button class="btn next"
+            id="nextBtn"
+            onclick="nextQuestion()">
+      Next →
+    </button>
+
+    <button class="btn submit"
+            id="submitBtn"
+            onclick="submitTest()">
+      Submit Test
+    </button>
+
+  </div>
+
+  <div class="result" id="result">
+
+    <div class="result-title">
+      YOUR FINAL SCORE
     </div>
 
-    <div class="progress">
-        <div class="progress-bar" id="progressBar"></div>
+    <div class="score" id="score">
+      0.00
     </div>
-</div>
 
-<div id="quiz"></div>
-
-<button class="submit-btn" id="submitBtn" onclick="submitTest()">
-    Submit Test
-</button>
-
-<div class="result" id="result">
-
-    <div>YOUR SCORE</div>
-
-    <div class="score" id="score">0</div>
-
-    <div id="resultMessage"></div>
+    <div class="result-message" id="resultMessage"></div>
 
     <div class="result-grid">
 
-        <div class="result-item">
-            <small>Correct</small>
-            <strong id="correct">0</strong>
-        </div>
+      <div class="result-box">
+        <small>Correct</small>
+        <strong id="correct">0</strong>
+      </div>
 
-        <div class="result-item">
-            <small>Wrong</small>
-            <strong id="wrong">0</strong>
-        </div>
+      <div class="result-box">
+        <small>Wrong</small>
+        <strong id="wrong">0</strong>
+      </div>
 
-        <div class="result-item">
-            <small>Negative</small>
-            <strong id="negative">0</strong>
-        </div>
+      <div class="result-box">
+        <small>Negative Marks</small>
+        <strong id="negative">0.00</strong>
+      </div>
 
     </div>
 
-    <button class="restart" onclick="location.reload()">
-        🔄 Restart Test
+    <div class="solutions">
+
+      <h2>📖 Detailed Solutions</h2>
+
+      <div id="solutionContent"></div>
+
+    </div>
+
+    <button class="btn restart"
+            onclick="location.reload()">
+      🔄 Retake Mock Test
     </button>
 
-</div>
-
-<div class="solution" id="solution">
-    <h2>📘 Detailed Solutions</h2>
-    <div id="solutionContent"></div>
-</div>
+  </div>
 
 </main>
 
@@ -417,376 +507,438 @@ body{
 const questions = [
 
 {
-en:"Find the next number: 2, 6, 12, 20, 30, ?",
-od:"ପରବର୍ତ୍ତୀ ସଂଖ୍ୟା ନିର୍ଣ୍ଣୟ କର: 2, 6, 12, 20, 30, ?",
+en:"Select the set in which the numbers are related in the same way as (15, 12, 81).",
+od:"(15, 12, 81) ସହିତ ସମାନ ଭାବରେ ସମ୍ପର୍କିତ ସେଟ୍‌ଟି ଚୟନ କର।",
 options:[
-["28","28"],
-["36","36"],
-["40","40"],
-["42","42"]
+["(16, 11, 125)","(16, 11, 125)"],
+["(18, 15, 99)","(18, 15, 99)"],
+["(20, 14, 180)","(20, 14, 180)"],
+["(13, 9, 80)","(13, 9, 80)"]
+],
+answer:1,
+solutionEn:"First number² − second number² = third number. 18² − 15² = 324 − 225 = 99.",
+solutionOd:"ପ୍ରଥମ ସଂଖ୍ୟା² − ଦ୍ୱିତୀୟ ସଂଖ୍ୟା² = ତୃତୀୟ ସଂଖ୍ୟା। 18² − 15² = 324 − 225 = 99।"
+},
+
+{
+en:"In a certain code language, TIGER is written as QDFHS and HORSE as DRNQG. How will MONKEY be written?",
+od:"ଏକ ନିର୍ଦ୍ଦିଷ୍ଟ କୋଡ୍ ଭାଷାରେ TIGER କୁ QDFHS ଏବଂ HORSE କୁ DRNQG ଲେଖାଯାଏ। MONKEY କୁ କିପରି ଲେଖାଯିବ?",
+options:[
+["XDJMNL","XDJMNL"],
+["XDJNML","XDJNML"],
+["XEJNML","XEJNML"],
+["YDKMNL","YDKMNL"]
+],
+answer:0,
+solutionEn:"Reverse MONKEY → Y E K N O M. Move every letter one step backward: X D J M N L.",
+solutionOd:"MONKEY କୁ ଓଲଟା କଲେ Y E K N O M। ପ୍ରତ୍ୟେକ ଅକ୍ଷରକୁ ଗୋଟିଏ ସ୍ଥାନ ପଛକୁ ନେଲେ X D J M N L।"
+},
+
+{
+en:"A + B means A is the father of B; A − B means A is the sister of B; A × B means A is the brother of B; A ÷ B means A is the mother of B. If P × Q ÷ R + S − T, how is P related to T?",
+od:"A + B ଅର୍ଥ A, B ଙ୍କ ବାପା; A − B ଅର୍ଥ A, B ଙ୍କ ଭଉଣୀ; A × B ଅର୍ଥ A, B ଙ୍କ ଭାଇ; A ÷ B ଅର୍ଥ A, B ଙ୍କ ମାଆ। P × Q ÷ R + S − T ହେଲେ P ଙ୍କର T ସହିତ ସମ୍ପର୍କ କ'ଣ?",
+options:[
+["Maternal Uncle","ମାତୃକ ମାମୁ"],
+["Paternal Grandfather's Brother","ପିତାମହଙ୍କ ଭାଇ"],
+["Paternal Great Uncle","ପିତାମହୀଙ୍କ ଭାଇ"],
+["Brother of Paternal Grandmother","ପିତାମହୀଙ୍କ ଭାଇ"]
 ],
 answer:3,
-solutionEn:"The differences are 4, 6, 8, 10. The next difference is 12. Therefore 30 + 12 = 42.",
-solutionOd:"ପାର୍ଥକ୍ୟ 4, 6, 8, 10 ଅଟେ। ପରବର୍ତ୍ତୀ ପାର୍ଥକ୍ୟ 12 ହେବ। ତେଣୁ 30 + 12 = 42।"
+solutionEn:"S is the sister of T. R is their father. Q is R's mother, so Q is T's paternal grandmother. P is Q's brother. Therefore P is the brother of T's paternal grandmother.",
+solutionOd:"S, T ଙ୍କ ଭଉଣୀ। R, S ଓ T ଙ୍କ ବାପା। Q, R ଙ୍କ ମାଆ, ତେଣୁ Q ହେଉଛନ୍ତି T ଙ୍କ ପିତାମହୀ। P, Q ଙ୍କ ଭାଇ। ତେଣୁ P ହେଉଛନ୍ତି T ଙ୍କ ପିତାମହୀଙ୍କ ଭାଇ।"
 },
 
 {
-en:"If CAT is coded as DBU, how is DOG coded?",
-od:"ଯଦି CAT କୁ DBU ଭାବରେ କୋଡ୍ କରାଯାଏ, ତେବେ DOG କୁ କିପରି କୋଡ୍ କରାଯିବ?",
+en:"Find the missing number: 12, 25, 53, 111, 229, ?",
+od:"ଖାଲି ସ୍ଥାନରେ କେଉଁ ସଂଖ୍ୟା ଆସିବ: 12, 25, 53, 111, 229, ?",
 options:[
-["EPH","EPH"],
-["EOG","EOG"],
-["FPH","FPH"],
-["DPH","DPH"]
+["465","465"],
+["467","467"],
+["469","469"],
+["471","471"]
+],
+answer:1,
+solutionEn:"12×2+1=25, 25×2+3=53, 53×2+5=111, 111×2+7=229. Therefore 229×2+9 = 467.",
+solutionOd:"12×2+1=25, 25×2+3=53, 53×2+5=111, 111×2+7=229। ତେଣୁ 229×2+9 = 467।"
+},
+
+{
+en:"Statements: All Pens are Books. Some Books are Pencils. No Pencil is an Eraser. Which conclusions follow? I. Some Books are not Erasers. II. Some Pens being Erasers is a possibility. III. No Pen is a Pencil.",
+od:"ବକ୍ତବ୍ୟ: ସମସ୍ତ Pen ହେଉଛି Book। କିଛି Book ହେଉଛି Pencil। କୌଣସି Pencil Eraser ନୁହେଁ। କେଉଁ ନିଷ୍କର୍ଷ ଅନୁସରଣ କରେ?",
+options:[
+["Only I and II follow","କେବଳ I ଏବଂ II"],
+["Only II and III follow","କେବଳ II ଏବଂ III"],
+["Only I follows","କେବଳ I"],
+["All I, II and III follow","I, II ଏବଂ III ସମସ୍ତ"]
 ],
 answer:0,
-solutionEn:"Each letter is moved one step forward: D→E, O→P, G→H. So DOG = EPH.",
-solutionOd:"ପ୍ରତ୍ୟେକ ଅକ୍ଷରକୁ ଗୋଟିଏ ସ୍ଥାନ ଆଗକୁ ନିଆଯାଇଛି: D→E, O→P, G→H। ତେଣୁ DOG = EPH।"
+solutionEn:"Some Books are Pencils and no Pencil is an Eraser, so some Books are not Erasers. Some Pens being Erasers is possible. III does not follow.",
+solutionOd:"କିଛି Book ହେଉଛି Pencil ଏବଂ କୌଣସି Pencil Eraser ନୁହେଁ, ତେଣୁ କିଛି Book Eraser ନୁହେଁ। Pen ଓ Eraser ମଧ୍ୟରେ ନିଷେଧ ନଥିବାରୁ II ସମ୍ଭବ। III ଅନୁସରଣ କରେନାହିଁ।"
 },
 
 {
-en:"A is the brother of B. B is the sister of C. How is A related to C?",
-od:"A, B ର ଭାଇ। B, C ର ଭଉଣୀ। A ଙ୍କର C ସହିତ ସମ୍ପର୍କ କ'ଣ?",
+en:"Which two signs should be interchanged to make the equation correct? 78 ÷ 6 × 4 + 18 − 12 = 46",
+od:"ସମୀକରଣଟିକୁ ସଠିକ୍ କରିବା ପାଇଁ କେଉଁ ଦୁଇଟି ଚିହ୍ନ ବଦଳାଯିବ? 78 ÷ 6 × 4 + 18 − 12 = 46",
 options:[
-["Brother / ଭାଇ","Brother / ଭାଇ"],
-["Sister / ଭଉଣୀ","Sister / ଭଉଣୀ"],
-["Father / ବାପା","Father / ବାପା"],
-["Uncle / ମାମୁ","Uncle / ମାମୁ"]
+["+ and −","+ ଏବଂ −"],
+["× and ÷","× ଏବଂ ÷"],
+["+ and ×","+ ଏବଂ ×"],
+["÷ and +","÷ ଏବଂ +"]
 ],
 answer:0,
-solutionEn:"B is C's sister and A is B's brother. Therefore A is also C's brother.",
-solutionOd:"B ହେଉଛି C ର ଭଉଣୀ ଏବଂ A ହେଉଛି B ର ଭାଇ। ତେଣୁ A, C ର ଭାଇ।"
+solutionEn:"Interchange + and −: 78÷6×4−18+12 = 52−18+12 = 46.",
+solutionOd:"+ ଏବଂ − ବଦଳାଇଲେ 78÷6×4−18+12 = 52−18+12 = 46।"
 },
 
 {
-en:"Which one is different from the others?",
-od:"ନିମ୍ନଲିଖିତ ମଧ୍ୟରୁ କେଉଁଟି ଅଲଗା?",
+en:"Three of the following four letter-clusters are alike. Select the different one.",
+od:"ନିମ୍ନରେ ଥିବା ଚାରୋଟି letter-cluster ମଧ୍ୟରୁ ତିନୋଟି ସମାନ। ଅଲଗାଟି ଚୟନ କର।",
 options:[
-["Apple / ସେଓ","Apple / ସେଓ"],
-["Mango / ଆମ୍ବ","Mango / ଆମ୍ବ"],
-["Potato / ଆଳୁ","Potato / ଆଳୁ"],
-["Banana / କଦଳୀ","Banana / କଦଳୀ"]
+["HSKP","HSKP"],
+["DWGT","DWGT"],
+["BYEV","BYEV"],
+["LOIR","LOIR"]
+],
+answer:3,
+solutionEn:"A, B and C follow the same opposite-letter and +3 pattern. D follows a different arrangement.",
+solutionOd:"A, B ଏବଂ C ସମାନ opposite-letter ଏବଂ +3 pattern ଅନୁସରଣ କରନ୍ତି। D ର arrangement ଅଲଗା।"
+},
+
+{
+en:"Ananya walks 15 m North, then 12 m East, then 20 m South, and finally 8 m East. What is the shortest distance from the starting point?",
+od:"ଅନନ୍ୟା 15 m ଉତ୍ତର, 12 m ପୂର୍ବ, 20 m ଦକ୍ଷିଣ ଏବଂ 8 m ପୂର୍ବକୁ ଯାଏ। ଆରମ୍ଭ ସ୍ଥାନରୁ ସବୁଠାରୁ କମ୍ ଦୂରତା କେତେ?",
+options:[
+["25 m","25 m"],
+["20√2 m","20√2 m"],
+["5√17 m","5√17 m"],
+["30 m","30 m"]
 ],
 answer:2,
-solutionEn:"Apple, mango and banana are fruits. Potato is a vegetable.",
-solutionOd:"ସେଓ, ଆମ୍ବ ଓ କଦଳୀ ଫଳ। ଆଳୁ ଏକ ପନିପରିବା।"
+solutionEn:"Net displacement = 20 m East and 5 m South. Distance = √(20²+5²) = √425 = 5√17 m.",
+solutionOd:"ମୋଟ displacement = 20 m ପୂର୍ବ ଏବଂ 5 m ଦକ୍ଷିଣ। ଦୂରତା = √(20²+5²) = √425 = 5√17 m।"
 },
 
 {
-en:"If SOUTH is written as HTUOS, how is NORTH written?",
-od:"ଯଦି SOUTH କୁ HTUOS ଭାବରେ ଲେଖାଯାଏ, ତେବେ NORTH କୁ କିପରି ଲେଖାଯିବ?",
+en:"Six persons P, Q, R, S, T and U sit in a row facing North. T is third to the right of P. Neither P nor T is at an extreme end. S is second to the left of U. R is not an immediate neighbour of T. Who sits at the extreme right end?",
+od:"P, Q, R, S, T ଏବଂ U ଛଅଜଣ ଉତ୍ତର ଦିଗକୁ ମୁହଁ କରି ଧାଡ଼ିରେ ବସିଛନ୍ତି। T, P ଙ୍କ ଡାହାଣରୁ ତୃତୀୟ। P କିମ୍ବା T extreme end ରେ ନାହାନ୍ତି। S, U ଙ୍କ ବାମରୁ ଦ୍ୱିତୀୟ। R, T ଙ୍କ immediate neighbour ନୁହେଁ। Extreme right end ରେ କିଏ?",
 options:[
-["HTRON","HTRON"],
-["NHTRO","NHTRO"],
-["HTORN","HTORN"],
-["TNRHO","TNRHO"]
+["U","U"],
+["Q","Q"],
+["T","T"],
+["S","S"]
 ],
 answer:0,
-solutionEn:"The word is written in reverse order. NORTH becomes HTRON.",
-solutionOd:"ଶବ୍ଦଟିକୁ ଓଲଟା କରି ଲେଖାଯାଇଛି। NORTH ର ଓଲଟା HTRON।"
+solutionEn:"P is at position 2 and T at position 5. S is at 4 and U at 6. Therefore U is at the extreme right.",
+solutionOd:"P position 2 ଏବଂ T position 5। S position 4 ଏବଂ U position 6। ତେଣୁ extreme right ରେ U।"
 },
 
 {
-en:"A man walks 5 km north, then turns right and walks 3 km. Which direction is he from the starting point?",
-od:"ଜଣେ ବ୍ୟକ୍ତି 5 କିମି ଉତ୍ତରକୁ ଯାଏ, ପରେ ଡାହାଣକୁ ବୁଲି 3 କିମି ଯାଏ। ସେ ଆରମ୍ଭ ସ୍ଥାନର କେଉଁ ଦିଗରେ ଅଛି?",
+en:"CROWD : 64 :: TEMPLE : ?",
+od:"CROWD : 64 :: TEMPLE : ?",
 options:[
-["North-East / ଉତ୍ତର-ପୂର୍ବ","North-East / ଉତ୍ତର-ପୂର୍ବ"],
-["South-East / ଦକ୍ଷିଣ-ପୂର୍ବ","South-East / ଦକ୍ଷିଣ-ପୂର୍ବ"],
-["North-West / ଉତ୍ତର-ପଶ୍ଚିମ","North-West / ଉତ୍ତର-ପଶ୍ଚିମ"],
-["South-West / ଦକ୍ଷିଣ-ପଶ୍ଚିମ","South-West / ଦକ୍ଷିଣ-ପଶ୍ଚିମ"]
+["100","100"],
+["144","144"],
+["81","81"],
+["121","121"]
 ],
-answer:0,
-solutionEn:"He moves north and then east. Therefore he is in the north-east direction.",
-solutionOd:"ସେ ପ୍ରଥମେ ଉତ୍ତର ଏବଂ ପରେ ପୂର୍ବକୁ ଯାଏ। ତେଣୁ ସେ ଉତ୍ତର-ପୂର୍ବ ଦିଗରେ ଅଛି।"
-},
-
-{
-en:"Choose the odd pair.",
-od:"ଅଲଗା ଯୋଡ଼ିଟି ଚୟନ କର।",
-options:[
-["2 : 4","2 : 4"],
-["3 : 9","3 : 9"],
-["4 : 16","4 : 16"],
-["5 : 20","5 : 20"]
-],
-answer:3,
-solutionEn:"In the first three pairs, the second number is the square of the first. 5² = 25, not 20.",
-solutionOd:"ପ୍ରଥମ ତିନୋଟି ଯୋଡ଼ିରେ ଦ୍ୱିତୀୟ ସଂଖ୍ୟା ପ୍ରଥମ ସଂଖ୍ୟାର ବର୍ଗ। 5² = 25, 20 ନୁହେଁ।"
-},
-
-{
-en:"If all roses are flowers and some flowers are red, which conclusion is definitely true?",
-od:"ଯଦି ସମସ୍ତ ଗୋଲାପ ଫୁଲ ଏବଂ କିଛି ଫୁଲ ଲାଲ, ତେବେ ନିଶ୍ଚିତ ଭାବେ କେଉଁ ନିଷ୍କର୍ଷ ସତ୍ୟ?",
-options:[
-["All roses are flowers / ସମସ୍ତ ଗୋଲାପ ଫୁଲ","All roses are flowers / ସମସ୍ତ ଗୋଲାପ ଫୁଲ"],
-["All flowers are roses / ସମସ୍ତ ଫୁଲ ଗୋଲାପ","All flowers are roses / ସମସ୍ତ ଫୁଲ ଗୋଲାପ"],
-["All roses are red / ସମସ୍ତ ଗୋଲାପ ଲାଲ","All roses are red / ସମସ୍ତ ଗୋଲାପ ଲାଲ"],
-["No rose is red / କୌଣସି ଗୋଲାପ ଲାଲ ନୁହେଁ","No rose is red / କୌଣସି ଗୋଲାପ ଲାଲ ନୁହେଁ"]
-],
-answer:0,
-solutionEn:"The first statement directly says that all roses are flowers.",
-solutionOd:"ପ୍ରଥମ ବକ୍ତବ୍ୟରେ ସିଧାସଳଖ କୁହାଯାଇଛି ଯେ ସମସ୍ତ ଗୋଲାପ ଫୁଲ।"
-},
-
-{
-en:"Find the missing number: 3, 8, 15, 24, 35, ?",
-od:"ଖାଲି ସ୍ଥାନରେ କେଉଁ ସଂଖ୍ୟା ଆସିବ: 3, 8, 15, 24, 35, ?",
-options:[
-["46","46"],
-["48","48"],
-["49","49"],
-["50","50"]
-],
-answer:1,
-solutionEn:"Differences are 5, 7, 9, 11. The next difference is 13. Therefore 35 + 13 = 48.",
-solutionOd:"ପାର୍ଥକ୍ୟ 5, 7, 9, 11। ପରବର୍ତ୍ତୀ ପାର୍ଥକ୍ୟ 13। ତେଣୁ 35 + 13 = 48।"
-},
-
-{
-en:"In a class, Ramesh is 7th from the top and 18th from the bottom. How many students are there?",
-od:"ଏକ ଶ୍ରେଣୀରେ ରମେଶ ଉପରୁ 7ମ ଏବଂ ତଳୁ 18ମ। ଶ୍ରେଣୀରେ ମୋଟ କେତେ ଜଣ ଛାତ୍ର ଅଛନ୍ତି?",
-options:[
-["24","24"],
-["25","25"],
-["26","26"],
-["27","27"]
-],
-answer:1,
-solutionEn:"Total = 7 + 18 − 1 = 24. Wait: the correct calculation gives 24, so option A is correct.",
-solutionOd:"ମୋଟ = 7 + 18 − 1 = 24। ତେଣୁ ସଠିକ୍ ଉତ୍ତର A — 24।"
+answer:2,
+solutionEn:"CROWD has 5 letters: (5+3)² = 64. TEMPLE has 6 letters: (6+3)² = 81. Correct answer is 81.",
+solutionOd:"CROWD ରେ 5ଟି ଅକ୍ଷର: (5+3)² = 64। TEMPLE ରେ 6ଟି ଅକ୍ଷର: (6+3)² = 81। ସଠିକ୍ ଉତ୍ତର 81।"
 }
 
 ];
 
-let currentLanguage = "en";
-let answers = Array(questions.length).fill(null);
-let seconds = 0;
-let timerInterval;
-let submitted = false;
+let current=0;
+let answers=new Array(questions.length).fill(null);
+let language="en";
+let elapsed=0;
+let submitted=false;
+let clock;
 
-function renderQuiz(){
+function render(){
 
-    const quiz = document.getElementById("quiz");
+  const q=questions[current];
 
-    quiz.innerHTML = "";
+  const text=
+    language==="en" ? q.en : q.od;
 
-    questions.forEach((q,index)=>{
+  let html=`
+    <div class="question-card">
 
-        const card = document.createElement("div");
-        card.className = "question-card";
+      <div class="q-number">
+        QUESTION ${current+1} OF ${questions.length}
+      </div>
 
-        const questionText =
-            currentLanguage === "en" ? q.en : q.od;
+      <div class="question">
+        ${text}
+      </div>
 
-        card.innerHTML = `
-            <div class="question-number">
-                QUESTION ${index+1} / ${questions.length}
-            </div>
+      <div class="options">
+  `;
 
-            <div class="question">
-                ${questionText}
-            </div>
+  q.options.forEach((op,i)=>{
 
-            <div class="options">
-                ${q.options.map((op,i)=>`
-                    <label class="option ${answers[index]===i?'selected':''}"
-                           onclick="selectOption(${index},${i})">
+    const optionText=
+      language==="en" ? op[0] : op[1];
 
-                        <span class="circle"></span>
+    html+=`
+      <button
+        type="button"
+        class="option ${answers[current]===i?'selected':''}"
+        onclick="selectAnswer(${i})">
 
-                        <span>
-                            ${currentLanguage === "en" ? op[0] : op[1]}
-                        </span>
+        <span class="radio"></span>
 
-                    </label>
-                `).join("")}
-            </div>
-        `;
+        <span>
+          <span class="letter">
+            ${String.fromCharCode(65+i)})
+          </span>
+          ${optionText}
+        </span>
 
-        quiz.appendChild(card);
-    });
+      </button>
+    `;
 
-    updateProgress();
+  });
+
+  html+=`
+      </div>
+    </div>
+  `;
+
+  document.getElementById("quiz").innerHTML=html;
+
+  document.getElementById("progressText").innerText=
+    `Question ${current+1} of ${questions.length}`;
+
+  document.getElementById("progressBar").style.width=
+    ((current+1)/questions.length*100)+"%";
+
+  document.getElementById("prevBtn").style.visibility=
+    current===0 ? "hidden" : "visible";
+
+  document.getElementById("nextBtn").style.display=
+    current===questions.length-1 ? "none" : "block";
+
+  document.getElementById("submitBtn").style.display=
+    current===questions.length-1 ? "block" : "none";
 }
 
-function selectOption(qIndex,optionIndex){
+function selectAnswer(index){
 
-    if(submitted) return;
+  if(submitted)return;
 
-    answers[qIndex] = optionIndex;
+  answers[current]=index;
 
-    renderQuiz();
+  render();
 }
 
-function updateProgress(){
+function nextQuestion(){
 
-    const answered =
-        answers.filter(a=>a!==null).length;
+  if(current<questions.length-1){
 
-    document.getElementById("progressText").innerText =
-        `Answered ${answered} / ${questions.length}`;
+    current++;
 
-    document.getElementById("progressBar").style.width =
-        (answered/questions.length*100)+"%";
+    render();
+  }
 }
 
-function setLanguage(lang){
+function previousQuestion(){
 
-    if(submitted) return;
+  if(current>0){
 
-    currentLanguage = lang;
+    current--;
 
-    document.querySelectorAll(".lang-btn")
-        .forEach(btn=>btn.classList.remove("active"));
-
-    if(lang==="en"){
-        document.querySelectorAll(".lang-btn")[0]
-            .classList.add("active");
-    }else{
-        document.querySelectorAll(".lang-btn")[1]
-            .classList.add("active");
-    }
-
-    renderQuiz();
+    render();
+  }
 }
 
-function startTimer(){
+function changeLanguage(lang){
 
-    timerInterval = setInterval(()=>{
+  if(submitted)return;
 
-        seconds++;
+  language=lang;
 
-        let min =
-            Math.floor(seconds/60)
-            .toString()
-            .padStart(2,"0");
+  document.getElementById("englishBtn")
+    .classList.toggle("active",lang==="en");
 
-        let sec =
-            (seconds%60)
-            .toString()
-            .padStart(2,"0");
+  document.getElementById("odiaBtn")
+    .classList.toggle("active",lang==="od");
 
-        document.getElementById("timer")
-            .innerText = `${min}:${sec}`;
-
-        if(seconds >= 420){
-            submitTest();
-        }
-
-    },1000);
+  render();
 }
 
 function submitTest(){
 
-    if(submitted) return;
+  if(submitted)return;
 
-    submitted = true;
+  submitted=true;
 
-    clearInterval(timerInterval);
+  clearInterval(clock);
 
-    let correct = 0;
-    let wrong = 0;
+  let correct=0;
+  let wrong=0;
 
-    answers.forEach((ans,index)=>{
+  questions.forEach((q,i)=>{
 
-        if(ans === null) return;
+    if(answers[i]===null)return;
 
-        if(ans === questions[index].answer){
-            correct++;
-        }else{
-            wrong++;
-        }
+    if(answers[i]===q.answer){
+      correct++;
+    }else{
+      wrong++;
+    }
 
-    });
+  });
 
-    const negative = wrong * 0.25;
+  const negative=wrong*0.25;
 
-    const score = correct - negative;
+  const score=correct-negative;
 
-    document.getElementById("score")
-        .innerText = score.toFixed(2);
+  document.getElementById("score").innerText=
+    score.toFixed(2);
 
-    document.getElementById("correct")
-        .innerText = correct;
+  document.getElementById("correct").innerText=
+    correct;
 
-    document.getElementById("wrong")
-        .innerText = wrong;
+  document.getElementById("wrong").innerText=
+    wrong;
 
-    document.getElementById("negative")
-        .innerText = negative.toFixed(2);
+  document.getElementById("negative").innerText=
+    negative.toFixed(2);
 
-    document.getElementById("resultMessage")
-        .innerText =
-        `Attempted ${correct + wrong} / ${questions.length}`;
+  document.getElementById("resultMessage").innerText=
+    `Attempted ${correct+wrong} of ${questions.length} questions`;
 
-    document.getElementById("result").style.display = "block";
+  document.getElementById("quiz").style.display="none";
+  document.querySelector(".progress").style.display="none";
+  document.querySelector(".progress-info").style.display="none";
+  document.querySelector(".navigation").style.display="none";
+  document.querySelector(".language-box").style.display="none";
 
-    document.getElementById("submitBtn").disabled = true;
+  document.getElementById("result").style.display="block";
 
-    showSolutions();
-    
-    window.scrollTo({
-        top:document.getElementById("result").offsetTop-70,
-        behavior:"smooth"
-    });
+  showSolutions();
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
 }
 
 function showSolutions(){
 
-    const box =
-        document.getElementById("solutionContent");
+  const box=
+    document.getElementById("solutionContent");
 
-    box.innerHTML = "";
+  box.innerHTML="";
 
-    questions.forEach((q,index)=>{
+  questions.forEach((q,i)=>{
 
-        const userAnswer = answers[index];
+    const selected=answers[i];
 
-        const correctAnswer = q.answer;
+    let status;
 
-        const status =
-            userAnswer === null
-            ? `<span>Not Attempted</span>`
-            : userAnswer === correctAnswer
-            ? `<span class="correct">Correct ✓</span>`
-            : `<span class="wrong">Wrong ✕</span>`;
+    if(selected===null){
 
-        const correctText =
-            currentLanguage === "en"
-            ? q.options[correctAnswer][0]
-            : q.options[correctAnswer][1];
+      status=
+        `<span>Not Attempted</span>`;
 
-        const explanation =
-            currentLanguage === "en"
-            ? q.solutionEn
-            : q.solutionOd;
+    }else if(selected===q.answer){
 
-        box.innerHTML += `
+      status=
+        `<span class="correct">Correct ✓</span>`;
 
-            <div class="sol-card">
+    }else{
 
-                <h3>Q${index+1}. ${status}</h3>
+      status=
+        `<span class="wrong">Wrong ✕</span>`;
+    }
 
-                <p>
-                    <b>Correct Answer:</b>
-                    ${correctText}
-                </p>
+    const correctText=
+      language==="en"
+      ? q.options[q.answer][0]
+      : q.options[q.answer][1];
 
-                <p style="margin-top:8px">
-                    <b>Solution:</b>
-                    ${explanation}
-                </p>
+    const explanation=
+      language==="en"
+      ? q.solutionEn
+      : q.solutionOd;
 
-            </div>
+    const yourAnswer=
+      selected===null
+      ? "Not Attempted"
+      : language==="en"
+      ? q.options[selected][0]
+      : q.options[selected][1];
 
-        `;
-    });
+    box.innerHTML+=`
 
-    document.getElementById("solution")
-        .style.display = "block";
+      <div class="solution">
+
+        <h3>
+          Q${i+1}. ${status}
+        </h3>
+
+        <p>
+          <b>Your Answer:</b>
+          ${yourAnswer}
+        </p>
+
+        <p style="margin-top:6px">
+          <b>Correct Answer:</b>
+          ${correctText}
+        </p>
+
+        <div class="explanation">
+          <b>Solution:</b><br>
+          ${explanation}
+        </div>
+
+      </div>
+
+    `;
+
+  });
 }
 
-renderQuiz();
+function startTimer(){
+
+  clock=setInterval(()=>{
+
+    elapsed++;
+
+    const minutes=
+      Math.floor(elapsed/60)
+      .toString()
+      .padStart(2,"0");
+
+    const seconds=
+      (elapsed%60)
+      .toString()
+      .padStart(2,"0");
+
+    document.getElementById("timer").innerText=
+      `${minutes}:${seconds}`;
+
+    if(elapsed>=420){
+
+      clearInterval(clock);
+
+      submitTest();
+    }
+
+    if(elapsed>=360){
+
+      document.getElementById("timer")
+        .classList.add("warning");
+    }
+
+  },1000);
+}
+
+render();
+
 startTimer();
 
 </script>
