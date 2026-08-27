@@ -257,6 +257,87 @@ footer p{
         padding:0 15px;
     }
 }
+    /* ===== DARK MODE BUTTON ===== */
+
+.theme-toggle{
+  width:42px;
+  height:42px;
+  border:1px solid #ddd;
+  border-radius:50%;
+  background:#fff;
+  color:#111;
+  font-size:19px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:.3s ease;
+}
+
+.theme-toggle:hover{
+  transform:scale(1.08);
+}
+
+/* ===== DARK MODE ===== */
+
+body.dark-mode{
+  background:#050505 !important;
+  color:#f5f5f5 !important;
+}
+
+body.dark-mode header{
+  background:rgba(8,8,8,.96) !important;
+  border-bottom:1px solid #252525 !important;
+}
+
+body.dark-mode nav a{
+  color:#ddd !important;
+}
+
+body.dark-mode .hero{
+  background:linear-gradient(135deg,#080808,#151515) !important;
+}
+
+body.dark-mode .hero p{
+  color:#aaa !important;
+}
+
+body.dark-mode .category,
+body.dark-mode .pdf-card{
+  background:#111 !important;
+  color:#fff !important;
+  border:1px solid #292929;
+  box-shadow:0 10px 35px rgba(0,0,0,.5);
+}
+
+body.dark-mode .category h3,
+body.dark-mode .pdf-card h3{
+  color:#fff !important;
+}
+
+body.dark-mode .pdf-card p{
+  color:#aaa !important;
+}
+
+body.dark-mode .search{
+  background:#111 !important;
+  border:1px solid #292929 !important;
+}
+
+body.dark-mode .search input{
+  background:#111 !important;
+  color:#fff !important;
+}
+
+body.dark-mode .search input::placeholder{
+  color:#777 !important;
+}
+
+body.dark-mode .theme-toggle{
+  background:#191919;
+  color:#fff;
+  border-color:#444;
+}
 </style>
 </head>
 
