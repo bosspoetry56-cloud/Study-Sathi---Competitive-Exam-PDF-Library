@@ -78,14 +78,16 @@ function loadQ(){
  for(let i=0;i<4;i++)
  document.getElementById("o"+i).innerText=x.o[i];
  document.querySelectorAll("input").forEach(e=>e.checked=false);
-}
-
 function nextQ(){
- let c=document.querySelector("input:checked");
- if(c && Number(c.value)==questions[current].a) score++;
- current++;
- if(current<questions.length) loadQ();
- else alert("Score: "+score+"/"+questions.length);
+  const c=document.querySelector("input:checked");
+  if(!c) return;
+
+  if(Number(c.value)===questions[current].a) score++;
+  current++;
+
+  if(current<questions.length) loadQ();
+  else alert("Score: "+score+"/"+questions.length);
+ }
 }
 loadQ();
 </script>
