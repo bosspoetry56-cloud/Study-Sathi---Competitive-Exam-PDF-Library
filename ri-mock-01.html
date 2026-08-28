@@ -22,6 +22,7 @@ body{margin:0;background:#0b1220;color:#fff;font-family:Arial}
 </div>
 
 <div class="box">
+  <div id="palette" style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:14px 0"></div>
   <div style="margin-bottom:12px">
   <div style="display:flex;justify-content:space-between">
     <small>Question <span id="qno">1</span>/20</small>
@@ -190,3 +191,17 @@ document.body.innerHTML=`
 🔄 Restart Mock Test
 </button>
 </div>`;
+loadQuestion();
+
+const palette=document.getElementById("palette");
+for(let i=0;i<questions.length;i++){
+  palette.innerHTML+=`<button onclick="jump(${i})" id="p${i}">${i+1}</button>`;
+}
+function jump(i){
+  current=i;
+  loadQuestion();
+}
+
+</script>
+</body>
+</html>
