@@ -1404,10 +1404,22 @@ window.addEventListener("DOMContentLoaded", function(){
   }
 
 });
+    function openSignup(){
+  document.getElementById("signupModal").style.display="flex";
+}
+
+function closeSignup(){
+  document.getElementById("signupModal").style.display="none";
+}
+
+function createAccount(){
+  alert("Account Created Successfully!");
+  closeSignup();
+}
 </script>
     <div id="signupModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9999;align-items:center;justify-content:center;">
   <div style="background:#fff;padding:25px;border-radius:16px;width:90%;max-width:340px;">
-    <h2>Study Sathi</h2>
+<h2>Study Sathi <button onclick="closeSignup()" style="float:right;border:none;background:none;font-size:22px;cursor:pointer;">×</button></h2>
     <input placeholder="Full Name" style="width:100%;padding:10px;margin:8px 0;">
     <input type="email" placeholder="Email" style="width:100%;padding:10px;margin:8px 0;">
     <input type="password" placeholder="Password" style="width:100%;padding:10px;margin:8px 0;">
