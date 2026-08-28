@@ -155,19 +155,17 @@ setInterval(()=>{
 
 let current=0,score=0;
 
-ops.forEach((el,i)=>{
-  el.innerHTML=`<input type="radio" name="q1" value="${i}"> ${String.fromCharCode(65+i)}. ${questions[current].o[i]}`;
-});
+function loadQuestion(){
+  document.getElementById("qno").innerText=current+1;
+  document.querySelector("h3").innerText=`Q${current+1}. ${questions[current].q}`;
 
-document.querySelector(".card").insertAdjacentHTML("beforeend",`
-<div style="display:flex;gap:8px;margin-top:14px">
-  <button class="btn" onclick="prevQ()">⬅ Prev</button>
-  <button class="btn" onclick="markReview()">🚩 Review</button>
-  <button class="btn" onclick="nextQ()">Next ➜</button>
-</div>`);
+  const ops=document.querySelectorAll(".opt");
+  ops.forEach((el,i)=>{
+    el.innerHTML=`<input type="radio" name="q1" value="${i}"> ${String.fromCharCode(65+i)}. ${questions[current].o[i]}`;
+  });
+
+  document.getElementById("bar").style.width=((current+1)/questions.length*100)+"%";
 }
-
-document.querySelector(".btn").onclick=function(){
 const c=document.querySelector('input[name="q1"]:checked');
 if(c && Number(c.value)===questions[current].a) score++;
 if(c && Number(c.value)===questions[current].a){
