@@ -1,95 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>RI Mock Test 01</title>
+<title>RI Mock 01</title>
 <style>
 body{margin:0;background:#0b1220;color:#fff;font-family:Arial}
-.header{background:#2563eb;padding:16px;display:flex;justify-content:space-between}
-.box{padding:16px}
-.card{background:#111827;padding:16px;border-radius:14px}
-.opt{display:block;background:#1f2937;padding:12px;margin:10px 0;border-radius:10px}
-.btn{width:100%;padding:12px;background:#2563eb;color:#fff;border:none;border-radius:10px}
+.header{background:#2563eb;padding:15px;display:flex;justify-content:space-between}
+.box{padding:16px}.card{background:#111827;padding:16px;border-radius:12px}
+.opt{display:block;background:#1f2937;padding:10px;margin:8px 0;border-radius:8px}
+button{width:100%;padding:12px;background:#2563eb;color:#fff;border:none;border-radius:8px}
 </style>
 </head>
 <body>
 
 <div class="header">
-<b>RI Mock Test 01</b>
+<b>RI Mock 01</b>
 <b id="time">90:00</b>
 </div>
 
 <div class="box">
 <div class="card">
-<h3 id="q">Loading...</h3>
+<h3 id="q"></h3>
 
-<label class="opt"><input type="radio" name="q1" value="0"> <span id="o0"></span></label>
-<label class="opt"><input type="radio" name="q1" value="1"> <span id="o1"></span></label>
-<label class="opt"><input type="radio" name="q1" value="2"> <span id="o2"></span></label>
-<label class="opt"><input type="radio" name="q1" value="3"> <span id="o3"></span></label>
+<label class="opt"><input type="radio" name="a" value="0"> <span id="o0"></span></label>
+<label class="opt"><input type="radio" name="a" value="1"> <span id="o1"></span></label>
+<label class="opt"><input type="radio" name="a" value="2"> <span id="o2"></span></label>
+<label class="opt"><input type="radio" name="a" value="3"> <span id="o3"></span></label>
 
-<button class="btn" onclick="nextQ()">Next</button>
+<button onclick="nextQ()">Next</button>
 </div>
 </div>
 
 <script>
-let t=5400;
+let t=5400,i=0,score=0;
+
 setInterval(()=>{
  if(t>0){
   t--;
   let m=Math.floor(t/60),s=t%60;
   document.getElementById("time").innerText=
-   String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+  String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
  }
 },1000);
 
 const questions=[
-{q:"Choose the antonym of TENACIOUS",o:["Persistent","Yielding","Determined","Relentless"],a:1},
-{q:"Select the synonym of PRAGMATIC",o:["Idealistic","Practical","Unrealistic","Theoretical"],a:1}
-{q:"He prevented me ______ entering the examination hall.",o:["to","of","from","against"],a:2},
-{q:"Identify the correctly spelt word",o:["Millennium","Millenium","Milennium","Millenniam"],a:0},
-{q:"A person who loves books and reading",o:["Bibliophile","Philatelist","Polyglot","Somnambulist"],a:0},
-{q:"The chef prepared a sumptuous meal. (Passive)",o:["was prepared","is prepared","had prepared","was being prepared"],a:0},
-{q:"A piece of ______",o:["bread","cake","butter","cheese"],a:1},
-{q:"Indirect speech: I have passed...",o:["has passed","had passed","passed","would pass"],a:1},
-{q:"Find the error: Scarcely had the train arrived...",o:["A","B","C","No error"],a:1},
-{q:"She is capable ______ handling.",o:["for","of","at","with"],a:1},
-{q:"Antonym of AFFLUENT",o:["Wealthy","Impoverished","Prosperous","Rich"],a:1},
-{q:"A ______ of wolves",o:["pride","herd","pack","flock"],a:2},
-{q:"No sooner did the bell ring ___",o:["when","than","then","as"],a:1},
-{q:"Fear of confined spaces",o:["Hydrophobia","Claustrophobia","Acrophobia","Xenophobia"],a:1},
-{q:"Burn the bridge behind you",o:["Destroy retreat","Set fire","New relation","Waste money"],a:0},
-{q:"Plural of OASIS",o:["Oasiss","Oases","Oasises","Oasi"],a:1},
-{q:"If he ______ studied",o:["has","had","have","would"],a:1},
-{q:"Synonym of BENEVOLENT",o:["Cruel","Kind","Harsh","Greedy"],a:1},
-{q:"'Slowly' is a",o:["Adjective","Adverb","Preposition","Conjunction"],a:1},
-{q:"Correct sentence",o:["friends is","friends are","Either nor","Neither or"],a:1}
-];];
-  
+{q:"Antonym of TENACIOUS",o:["Persistent","Yielding","Determined","Relentless"],a:1},
+{q:"Synonym of PRAGMATIC",o:["Idealistic","Practical","Unrealistic","Theoretical"],a:1},
+{q:"He prevented me ___ entering",o:["to","of","from","against"],a:2}
+];
 
-let current=0,score=0;
-
-function loadQ(){
- let x=questions[current];
- for(let i=0;i<4;i++){
-  document.getElementById("o"+i).innerText = x.o[i];
- }
- for(let i=0;i<4;i++)
- document.getElementById("o"+i).innerText=x.o[i];
+function load(){
+ let x=questions[i];
+ document.getElementById("q").innerText="Q"+(i+1)+". "+x.q;
+ for(let k=0;k<4;k++)
+  document.getElementById("o"+k).innerText=x.o[k];
  document.querySelectorAll("input").forEach(e=>e.checked=false);
-function nextQ(){
-  const c=document.querySelector("input:checked");
-  if(!c) return;
-
-  if(Number(c.value)===questions[current].a) score++;
-  current++;
-
-  if(current<questions.length) loadQ();
-  else alert("Score: "+score+"/"+questions.length);
- }
 }
-loadQ();
+
+function nextQ(){
+ let c=document.querySelector("input:checked");
+ if(!c)return;
+ if(Number(c.value)==questions[i].a)score++;
+ i++;
+ if(i<questions.length)load();
+ else alert("Score: "+score+"/"+questions.length);
+}
+load();
 </script>
 
 </body>
