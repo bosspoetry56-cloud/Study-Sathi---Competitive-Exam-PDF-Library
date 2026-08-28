@@ -10,54 +10,43 @@ body{margin:0;background:#0b1220;color:#fff;font-family:Arial}
 .box{padding:16px}
 .card{background:#111827;padding:16px;border-radius:14px}
 .opt{display:block;background:#1f2937;padding:12px;margin:10px 0;border-radius:10px}
-.btn{background:#2563eb;color:#fff;border:none;padding:12px 18px;border-radius:10px;width:100%}
-.timer{font-weight:bold}
-  .palette{
-display:grid;
-grid-template-columns:repeat(5,1fr);
-gap:8px;
-margin:12px 0;
-}
-.palette button{
-height:40px;
-border:none;
-border-radius:8px;
-background:#374151;
-color:#fff;
-font-weight:bold;
-}
+.btn{width:100%;padding:12px;background:#2563eb;color:#fff;border:none;border-radius:10px}
 </style>
 </head>
 <body>
 
 <div class="header">
-  <div>RI Mock 01</div>
-  <div class="timer" id="time">90:00</div>
+<b>RI Mock Test 01</b>
+<b id="time">90:00</b>
 </div>
 
 <div class="box">
-  
-  
-  <div style="margin-bottom:12px">
-  <div style="display:flex;justify-content:space-between">
-    <small>Question <span id="qno">1</span>/20</small>
-    <small>Marks: <span id="marks">0</span></small>
-  </div>
-  <div style="height:8px;background:#1f2937;border-radius:10px">
-    <div id="bar" style="width:5%;height:8px;background:#22c55e;border-radius:10px"></div>
+<div class="card">
+<h3 id="q">Loading...</h3>
+
+<label class="opt"><input type="radio" name="q1" value="0"> <span id="o0"></span></label>
+<label class="opt"><input type="radio" name="q1" value="1"> <span id="o1"></span></label>
+<label class="opt"><input type="radio" name="q1" value="2"> <span id="o2"></span></label>
+<label class="opt"><input type="radio" name="q1" value="3"> <span id="o3"></span></label>
+
+<button class="btn" onclick="nextQ()">Next</button>
+</div>
+</div>
+
 <script>
-let t=5400, current=0, score=0, sx=0;
-
+let t=5400;
 setInterval(()=>{
-  if(t<=0) return;
+ if(t>0){
   t--;
-  let m=Math.floor(t/60), s=t%60;
-  document.getElementById("time").innerText =
-    String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+  let m=Math.floor(t/60),s=t%60;
+  document.getElementById("time").innerText=
+   String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+ }
+},1000);
 
-  const questions=[
+const questions=[
 {q:"Choose the antonym of TENACIOUS",o:["Persistent","Yielding","Determined","Relentless"],a:1},
-{q:"Select the synonym of PRAGMATIC",o:["Idealistic","Practical","Unrealistic","Theoretical"],a:1},
+{q:"Select the synonym of PRAGMATIC",o:["Idealistic","Practical","Unrealistic","Theoretical"],a:1}
 {q:"He prevented me ______ entering the examination hall.",o:["to","of","from","against"],a:2},
 {q:"Identify the correctly spelt word",o:["Millennium","Millenium","Milennium","Millenniam"],a:0},
 {q:"A person who loves books and reading",o:["Bibliophile","Philatelist","Polyglot","Somnambulist"],a:0},
@@ -76,162 +65,30 @@ setInterval(()=>{
 {q:"Synonym of BENEVOLENT",o:["Cruel","Kind","Harsh","Greedy"],a:1},
 {q:"'Slowly' is a",o:["Adjective","Adverb","Preposition","Conjunction"],a:1},
 {q:"Correct sentence",o:["friends is","friends are","Either nor","Neither or"],a:1}
-{q:"40% of (A-B)=20% of (A+B). B is?",o:["25%","33.33%","50%","20%"],a:1},
-{q:"Book sold at ₹540 with 10% loss. SP for 20% gain?",o:["720","680","700","750"],a:0},
-{q:"Average of 5 consecutive odd numbers is 27. Product of smallest & largest?",o:["713","675","805","741"],a:0},
-{q:"72 km/h train crosses pole in 15 s. Length?",o:["250 m","300 m","320 m","350 m"],a:1},
-{q:"A=15d, B=20d. Together 4 days. Work left?",o:["7/15","8/15","1/3","2/5"],a:0},
-{q:"CI on ₹12000 for 2 years @10%?",o:["2400","2520","2600","2450"],a:1},
-{q:"Ratio 5:7, LCM=350. Smaller number?",o:["50","70","35","25"],a:0},
-{q:"Money doubles in 5 years SI. Becomes 4 times in?",o:["12","15","20","10"],a:1},
-{q:"Alcohol:Water=4:3. Add 5L water →4:5. Alcohol?",o:["10","15","8","12"],a:0},
-{q:"Area=720, Length=36. Fencing @₹15/m?",o:["1680","1560","1820","1440"],a:0},
-{q:"Downstream=12, Upstream=8. Current?",o:["4","2","3","1.5"],a:1},
-{q:"a+b=9, ab=20. a²+b²=?",o:["41","61","51","71"],a:0},
-{q:"Perimeter of square=64. Diagonal?",o:["16√2","8√2","32","16"],a:0},
-{q:"30% markup, 10% discount. Profit %?",o:["20","17","18","15"],a:1},
-{q:"Pipe A=12h, B empties=18h. Fill together?",o:["36","30","24","40"],a:0},
-{q:"Half journey at 30 & 60. Avg speed?",o:["45","40","42","50"],a:1},
-{q:"√625+√484-√169=?",o:["34","32","36","30"],a:0},
-{q:"Population 8000 after 5% decrease. Previous?",o:["8400","8421","8500","8350"],a:1},
-{q:"Circumference=88. Area?",o:["616","308","154","1232"],a:0},
-{q:"18-[6-{4-(8-6+3)}]=?",o:["13","11","17","15"],a:0},{q:"Konark Sun Temple dynasty?",o:["Somavamshi","Eastern Ganga","Gajapati","Bhauma-Kara"],a:1},
-{q:"Inchudi Salt Satyagraha leader?",o:["H.K. Mahatab","Gopabandhu Choudhury","S.N. Das","Rama Devi"],a:3},
-{q:"Freshwater horseshoe lake of Odisha?",o:["Chilika","Ansupa","Sara","Tampara"],a:1},
-{q:"Baitarani originates from?",o:["Gonasika","Amarkantak","Eastern Ghats","Similipal"],a:0},
-{q:"Scheduled Areas are in which Schedule?",o:["4th","5th","6th","7th"],a:1},
-{q:"Ex-officio Chairman of Rajya Sabha?",o:["President","PM","Vice-President","CJI"],a:2},
-{q:"Gram Sabha comprises?",o:["Adults","Electoral roll","Ward members","Landowners"],a:1},
-{q:"Nalabana Sanctuary is inside?",o:["Bhitarkanika","Chilika","Similipal","Satkosia"],a:1},
-{q:"Odisha Panchayati Raj Day?",o:["5 Mar","24 Apr","1 Apr","15 Aug"],a:0},
-{q:"High Court writ article?",o:["32","226","136","143"],a:1},
-{q:"Washing soda chemical name?",o:["NaHCO3","Na2CO3·10H2O","CaOCl2","CuSO4"],a:1},
-{q:"Tropic of Cancer passes through states?",o:["6","7","8","9"],a:2},
-{q:"First Sahitya Akademi (Odia)?",o:["Gopinath Mohanty","Sitakant","Radhanath","Surendra"],a:0},
-{q:"Sunlight synthesizes which vitamin?",o:["A","C","D","K"],a:2},
-{q:"Rourkela Steel Plant collaboration?",o:["USSR","Germany","UK","USA"],a:1},
-{q:"Southernmost mainland India?",o:["Indira Point","Kanyakumari","Rameswaram","Minicoy"],a:1},
-{q:"National Panchayati Raj Day?",o:["24 Apr","5 Mar","2 Oct","26 Nov"],a:0},
-{q:"Plant tissue carrying water?",o:["Phloem","Xylem","Sclerenchyma","Collenchyma"],a:1},
-{q:"Barabati Fort king?",o:["Anangabhima III","Chodaganga","Kapilendra","Prataprudra"],a:0},
-{q:"Final interpreter of Constitution?",o:["President","Supreme Court","Parliament","AG"],a:1},{q:"Series: 4,9,25,49,121,?",o:["144","169","196","225"],a:1},
-{q:"Code: SEARCH",o:["214673","214763","246173","216473"],a:1},
-{q:"Woman said: His mother is the only daughter of my mother. Relation?",o:["Sister","Mother","Grandmother","Aunt"],a:1},
-{q:"If + = ÷, ÷ = ×, × = -, - = + : 36+6÷3-2×5=?",o:["15","18","20","22"],a:2},
-{q:"Book : Author :: Statue : ?",o:["Mason","Sculptor","Painter","Architect"],a:1},
-{q:"40 students, Amit 14th from left. Position from right?",o:["26","27","28","25"],a:1},
-{q:"Odd one out",o:["Paris","Rome","Berlin","New York"],a:3},
-{q:"All pens are books. All books are markers.",o:["Only I","Only II","Both","Neither"],a:2},
-{q:"Direction change: West becomes?",o:["North-East","South-East","North-West","South-West"],a:1},
-{q:"If 1 Jan 2024 Monday, 31 Dec 2024?",o:["Monday","Tuesday","Wednesday","Sunday"],a:1},{q:"Paste shortcut?",o:["Ctrl+P","Ctrl+V","Ctrl+C","Ctrl+X"],a:1},
-{q:"Main circuit board?",o:["Expansion","Motherboard","ALU","Breadboard"],a:1},
-{q:"Center align in Word?",o:["Ctrl+C","Ctrl+E","Ctrl+L","Ctrl+R"],a:1},
-{q:"Cell at column D row 8?",o:["8D","D$8","D8","$D8"],a:2},
-{q:"Secure web protocol?",o:["FTP","HTTP","HTTPS","SMTP"],a:2},
-{q:"Close active window?",o:["Alt+F4","Ctrl+F4","Alt+Shift","Ctrl+W"],a:0},
-{q:"CPU control unit?",o:["ALU","CU","Register","Cache"],a:1},
-{q:"SSD stands for?",o:["Solid State Disk","Solid State Drive","System Storage","Serial State"],a:1},
-{q:"PowerPoint thumbnail view?",o:["Slide Sorter","Slide Show","Outline","Reading"],a:0},
-{q:"IPv4 address bits?",o:["16","32","64","128"],a:1},
-{q:"HD video + audio port?",o:["VGA","DVI","HDMI","USB"],a:2},
-{q:"Format Cells shortcut?",o:["Ctrl+1","Ctrl+F","Ctrl+Shift+F","Alt+1"],a:0},
-{q:"Removes harmful files?",o:["Defrag","Antivirus","Backup","Task Manager"],a:1},
-{q:"Select all in Word?",o:["Ctrl+S","Ctrl+A","Ctrl+E","Ctrl+Shift+A"],a:1},
-{q:"Single office/campus network?",o:["WAN","MAN","LAN","PAN"],a:2},{q:"'ଉତ୍କର୍ଷ'ର ବିପରୀତ?",o:["ଅପକର୍ଷ","ନିକର୍ଷ","ଦୁଷ୍କର୍ଷ","ବିକର୍ଷ"],a:0},
-{q:"'ପଦ୍ମ'ର ସମାର୍ଥ ନୁହେଁ?",o:["ନଳିନ","ପଙ୍କଜ","ଅରବିନ୍ଦ","ମହୀଧର"],a:3},
-{q:"ଶୁଦ୍ଧ ବନାନ?",o:["ଉଜ୍ଜ୍ୱଳ","ଉଜ୍ବଳ","ଉଜ୍ୱଳ","ଉଜ୍ଜଳ"],a:0},
-{q:"'ଅନ୍ଧର ଲଉଡ଼ି' ଅର୍ଥ?",o:["ଅନ୍ଧାରେ ବୁଲିବା","ଏକମାତ୍ର ସାହାୟ","ଅନ୍ଧକୁ ସାହାଯ୍ୟ","ବାଡ଼ି ଧରିବା"],a:1},
-{q:"'ଦିଗ୍+ଅନ୍ତ' ସନ୍ଧି?",o:["ଦିଗନ୍ତ","ଦିଗାନ୍ତ","ଦିକନ୍ତ","ଦିଗ୍‌ଅନ୍ତ"],a:0},
-{q:"ଗୁଣ ପ୍ରକାଶ କରୁଥିବା ପଦ?",o:["କ୍ରିୟା","ବିଶେଷଣ","ଅବ୍ୟୟ","ସର୍ବନାମ"],a:1},
-{q:"'ଯେଉଁ ଲୋକ...' ବାକ୍ୟ?",o:["ସରଳ","ଯୌଗିକ","ଜଟିଳ","ମିଶ୍ର"],a:2},
-{q:"'ଦ୍ରୁତ' କି ପଦ?",o:["କ୍ରିୟା ବିଶେଷଣ","ବିଶେଷ୍ୟ ବିଶେଷଣ","ସାର୍ବନାମିକ","ତୁଳନାତ୍ମକ"],a:0},
-{q:"'ଜାଣିବାର ଇଚ୍ଛା'?",o:["ଜିଜ୍ଞାସା","ଚିକୀର୍ଷା","ପିପାସା","ଜିଗୀଷା"],a:0},
-{q:"'ପିତ୍ରାଳୟ' ସନ୍ଧି ବିଚ୍ଛେଦ?",o:["ପିତ୍ରି+ଆଳୟ","ପିତୃ+ଆଳୟ","ପିତ୍ର+ଆଳୟ","ପିତା+ଆଳୟ"],a:1},
-{q:"'ଆକାଶ କୁସୁମ' ଅର୍ଥ?",o:["ଆକାଶର ଫୁଲ","ଅସମ୍ଭବ କଳ୍ପନା","ସୁନ୍ଦର ଦୃଶ୍ୟ","ଆକାଶ ସୌନ୍ଦର୍ଯ୍ୟ"],a:1},
-{q:"ଶୁଦ୍ଧ ବନାନ?",o:["ଶାରିରୀକ","ଶାରୀରିକ","ଶାରିରିକ","ଶାରୀରୀକ"],a:1},
-{q:"'ବିପଦ'ର ଉପସର୍ଗ?",o:["ବି","ବିପ","ବିପଦ","ବ"],a:0},
-{q:"'ଅନୁରାଗ'ର ବିପରୀତ?",o:["ପ୍ରେମ","ବିରାଗ","ଦ୍ୱେଷ","କ୍ରୋଧ"],a:1},
-{q:"'ଦରିଦ୍ରମାନଙ୍କୁ' କେଉଁ କାରକ?",o:["କର୍ମ","କରଣ","ସମ୍ପ୍ରଦାନ","ଅପାଦାନ"],a:2},];
+];];
+  
 
 let current=0,score=0;
 
-function loadQuestion(){
-  document.getElementById("qno").innerText=current+1;
-  document.querySelector("h3").innerText=`Q${current+1}. ${questions[current].q}`;
-
-  const ops=document.querySelectorAll(".opt");
-  ops.forEach((el,i)=>{
-    el.innerHTML=`<input type="radio" name="q1" value="${i}"> ${String.fromCharCode(65+i)}. ${questions[current].o[i]}`;
-  });
-
-  document.getElementById("bar").style.width=((current+1)/questions.length*100)+"%";
+function loadQ(){
+ let x=questions[current];
+ for(let i=0;i<4;i++){
+  document.getElementById("o"+i).innerText = x.o[i];
+ }
+ for(let i=0;i<4;i++)
+ document.getElementById("o"+i).innerText=x.o[i];
+ document.querySelectorAll("input").forEach(e=>e.checked=false);
 }
-const c=document.querySelector('input[name="q1"]:checked');
-if(c && Number(c.value)===questions[current].a) score++;
-document.querySelector(".btn").onclick=function(){
-  const c=document.querySelector('input[name="q1"]:checked');
-  if(!c) return;
 
-  if(Number(c.value)===questions[current].a) score++;
-  else score-=0.25;
-
-  document.getElementById("marks").innerText=score.toFixed(2);
-
-  if(current<questions.length-1){
-    current++;
-    loadQuestion();
-  }else{
-    alert("Mock Test Completed");
-  }
-}
-<h1 style="text-align:center;color:#22c55e">🏆 Result Analysis</h1>
-
-<div style="background:#1e293b;padding:16px;border-radius:14px;margin:16px 0">
-<h2>Score: ${score.toFixed(2)} / ${questions.length}</h2>
-<p>✅ Correct: ${Math.max(0,Math.round(score))}</p>
-<p>❌ Wrong: ${questions.length-Math.max(0,Math.round(score))}</p>
-<p>🎯 Accuracy: ${((Math.max(0,Math.round(score))/questions.length)*100).toFixed(1)}%</p>
-<p>➖ Negative: -0.25</p>
-</div>
-
-<button onclick="location.reload()" style="width:100%;padding:14px;background:#2563eb;color:#fff;border:none;border-radius:12px;font-size:16px">
-🔄 Restart Mock Test
-</button>
-</div>`;
-loadQuestion();
-
-const palette=document.getElementById("palette");
-for(let i=0;i<questions.length;i++){
-  palette.innerHTML+=`<button onclick="jump(${i})" id="p${i}">${i+1}</button>`;
-}
-function jump(i){
-  current=i;
-  loadQuestion();
-}
 function nextQ(){
-  if(current<questions.length-1){
-    current++;
-    loadQuestion();
-  }
+ let c=document.querySelector("input:checked");
+ if(c && Number(c.value)==questions[current].a) score++;
+ current++;
+ if(current<questions.length) loadQ();
+ else alert("Score: "+score+"/"+questions.length);
 }
-
-function prevQ(){
-  if(current>0){
-    current--;
-    loadQuestion();
-  }
-}
-
-function markReview(){
-  document.getElementById("p"+current).style.background="#f59e0b";
-}
-  const oldLoad = loadQuestion;
-
-loadQuestion = function () {
-  oldLoad();
-  const btn = document.getElementById("p" + current);
-  if (btn) btn.style.background = "#22c55e";
-};
+loadQ();
 </script>
+
 </body>
 </html>
