@@ -45,29 +45,55 @@ setInterval(()=>{
 },1000);
 
 const questions=[
-{q:"Antonym of TENACIOUS",o:["Persistent","Yielding","Determined","Relentless"],a:1},
-{q:"Synonym of PRAGMATIC",o:["Idealistic","Practical","Unrealistic","Theoretical"],a:1},
-{q:"He prevented me ___ entering",o:["to","of","from","against"],a:2}
+{q:"Choose the antonym of TENACIOUS",o:["Persistent","Yielding","Determined","Relentless"],a:1},
+{q:"Select the synonym of PRAGMATIC",o:["Idealistic","Practical","Unrealistic","Theoretical"],a:1},
+{q:"He prevented me ___ entering the examination hall.",o:["to","of","from","against"],a:2},
+{q:"Identify the correctly spelt word",o:["Millennium","Millenium","Milennium","Millenniam"],a:0},
+{q:"A person who loves books and reading",o:["Bibliophile","Philatelist","Polyglot","Somnambulist"],a:0},
+{q:"The chef prepared a sumptuous meal. (Passive)",o:["was prepared","is prepared","had prepared","was being prepared"],a:0},
+{q:"A piece of ___",o:["bread","cake","butter","cheese"],a:1},
+{q:"Indirect speech: I have passed",o:["has passed","had passed","passed","would pass"],a:1},
+{q:"Find the error",o:["A","B","C","No error"],a:1},
+{q:"She is capable ___ handling.",o:["for","of","at","with"],a:1},
+{q:"Antonym of AFFLUENT",o:["Wealthy","Impoverished","Prosperous","Rich"],a:1},
+{q:"A ___ of wolves",o:["pride","herd","pack","flock"],a:2},
+{q:"No sooner did the bell ring ___",o:["when","than","then","as"],a:1},
+{q:"Fear of confined spaces",o:["Hydrophobia","Claustrophobia","Acrophobia","Xenophobia"],a:1},
+{q:"Burn the bridge behind you means",o:["Destroy retreat","Set fire","New relation","Waste money"],a:0},
+{q:"Plural of OASIS",o:["Oasiss","Oases","Oasises","Oasi"],a:1},
+{q:"If he ___ studied",o:["has","had","have","would"],a:1},
+{q:"Synonym of BENEVOLENT",o:["Cruel","Kind","Harsh","Greedy"],a:1},
+{q:"'Slowly' is a",o:["Adjective","Adverb","Preposition","Conjunction"],a:1},
+{q:"Correct sentence",o:["friends is","friends are","Either nor","Neither or"],a:1}
 ];
 
 function load(){
  let x=questions[i];
- document.getElementById("q").innerText="Q"+(i+1)+". "+x.q;
+ q.innerText="Q"+(i+1)+". "+x.q;
+
  for(let k=0;k<4;k++)
   document.getElementById("o"+k).innerText=x.o[k];
+
  document.querySelectorAll("input").forEach(e=>e.checked=false);
 }
 
 function nextQ(){
  let c=document.querySelector("input:checked");
- if(!c)return;
- if(Number(c.value)==questions[i].a)score++;
+ if(!c) return;
+
+ if(Number(c.value)===questions[i].a) score++;
+
  i++;
- if(i<questions.length)load();
+ if(i<questions.length) load();
  else alert("Score: "+score+"/"+questions.length);
 }
+
 load();
+document.getElementById("q").innerText=
+"Question ...";
 </script>
+</body>
+</html>
 
 </body>
 </html>
