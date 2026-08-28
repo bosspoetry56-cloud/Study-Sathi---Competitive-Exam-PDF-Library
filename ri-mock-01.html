@@ -12,6 +12,20 @@ body{margin:0;background:#0b1220;color:#fff;font-family:Arial}
 .opt{display:block;background:#1f2937;padding:12px;margin:10px 0;border-radius:10px}
 .btn{background:#2563eb;color:#fff;border:none;padding:12px 18px;border-radius:10px;width:100%}
 .timer{font-weight:bold}
+  .palette{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:8px;
+margin:12px 0;
+}
+.palette button{
+height:40px;
+border:none;
+border-radius:8px;
+background:#374151;
+color:#fff;
+font-weight:bold;
+}
 </style>
 </head>
 <body>
@@ -22,6 +36,7 @@ body{margin:0;background:#0b1220;color:#fff;font-family:Arial}
 </div>
 
 <div class="box">
+  <div class="palette" id="palette"></div>
   <div id="palette" style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:14px 0"></div>
   <div style="margin-bottom:12px">
   <div style="display:flex;justify-content:space-between">
@@ -156,12 +171,16 @@ String(m).padStart(2,'0')+":"+String(s).padStart(2,'0');
 
 let current=0,score=0;
 
-function loadQuestion(){
-document.querySelector("h3").innerText=`Q${current+1}. ${questions[current].q}`;
-const ops=document.querySelectorAll(".opt");
 ops.forEach((el,i)=>{
-el.innerHTML=`<input type="radio" name="q1" value="${i}"> ${String.fromCharCode(65+i)}. ${questions[current].o[i]}`;
+  el.innerHTML=`<input type="radio" name="q1" value="${i}"> ${String.fromCharCode(65+i)}. ${questions[current].o[i]}`;
 });
+
+document.querySelector(".card").insertAdjacentHTML("beforeend",`
+<div style="display:flex;gap:8px;margin-top:14px">
+  <button class="btn" onclick="prevQ()">⬅ Prev</button>
+  <button class="btn" onclick="markReview()">🚩 Review</button>
+  <button class="btn" onclick="nextQ()">Next ➜</button>
+</div>`);
 }
 
 document.querySelector(".btn").onclick=function(){
@@ -201,7 +220,23 @@ function jump(i){
   current=i;
   loadQuestion();
 }
+function nextQ(){
+  if(current<questions.length-1){
+    current++;
+    loadQuestion();
+  }
+}
 
+function prevQ(){
+  if(current>0){
+    current--;
+    loadQuestion();
+  }
+}
+
+function markReview(){
+  document.getElementById("p"+current).style.background="#f59e0b";
+}
 </script>
 </body>
 </html>
