@@ -237,6 +237,13 @@ function prevQ(){
 function markReview(){
   document.getElementById("p"+current).style.background="#f59e0b";
 }
+  const oldLoad = loadQuestion;
+
+loadQuestion = function () {
+  oldLoad();
+  const btn = document.getElementById("p" + current);
+  if (btn) btn.style.background = "#22c55e";
+};
 </script>
 </body>
 </html>
