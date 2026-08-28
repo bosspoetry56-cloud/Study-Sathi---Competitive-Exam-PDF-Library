@@ -168,16 +168,22 @@ function loadQuestion(){
 }
 const c=document.querySelector('input[name="q1"]:checked');
 if(c && Number(c.value)===questions[current].a) score++;
-if(c && Number(c.value)===questions[current].a){
-  score++;
-}else{
-  score-=0.25;
-}
-document.querySelectorAll('input[name="q1"]').forEach(x=>x.checked=false);
-}else{
+document.querySelector(".btn").onclick=function(){
+  const c=document.querySelector('input[name="q1"]:checked');
+  if(!c) return;
 
-document.body.innerHTML=`
-<div style="padding:24px;color:#fff;font-family:Arial;background:#0f172a;min-height:100vh">
+  if(Number(c.value)===questions[current].a) score++;
+  else score-=0.25;
+
+  document.getElementById("marks").innerText=score.toFixed(2);
+
+  if(current<questions.length-1){
+    current++;
+    loadQuestion();
+  }else{
+    alert("Mock Test Completed");
+  }
+}
 <h1 style="text-align:center;color:#22c55e">🏆 Result Analysis</h1>
 
 <div style="background:#1e293b;padding:16px;border-radius:14px;margin:16px 0">
