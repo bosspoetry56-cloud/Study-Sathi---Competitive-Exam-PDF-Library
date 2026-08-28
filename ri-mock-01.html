@@ -45,32 +45,16 @@ font-weight:bold;
   </div>
   <div style="height:8px;background:#1f2937;border-radius:10px">
     <div id="bar" style="width:5%;height:8px;background:#22c55e;border-radius:10px"></div>
-  </div>
-  </div>
-  <div class="card">
-    <h3>Q1. Choose the antonym of TENACIOUS</h3>
-
-    <label class="opt"><input type="radio" name="q1"> A. Persistent</label>
-    <label class="opt"><input type="radio" name="q1"> B. Yielding</label>
-    <label class="opt"><input type="radio" name="q1"> C. Determined</label>
-    <label class="opt"><input type="radio" name="q1"> D. Relentless</label>
-
-    <br>
-    <button class="btn">Next →</button>
-  </div>
-</div>
-
 <script>
-let t=5400;
+let t=5400, current=0, score=0, sx=0;
+
 setInterval(()=>{
-if(t>0){
-t--;
-let m=Math.floor(t/60);
-let s=t%60;
-document.getElementById("time").innerHTML=
-String(m).padStart(2,'0')+":"+String(s).padStart(2,'0');
-}
-},1000);
+  if(t<=0) return;
+  t--;
+  let m=Math.floor(t/60), s=t%60;
+  document.getElementById("time").innerText =
+    String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+
   const questions=[
 {q:"Choose the antonym of TENACIOUS",o:["Persistent","Yielding","Determined","Relentless"],a:1},
 {q:"Select the synonym of PRAGMATIC",o:["Idealistic","Practical","Unrealistic","Theoretical"],a:1},
